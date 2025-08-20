@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coming Soon</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      font-family: "Segoe UI", sans-serif;
-      text-align: center;
+      height: 100vh;
+      background: #f4f4f4;
+      font-family: Arial, sans-serif;
+      color: #333;
     }
     .container {
-      animation: fadeIn 2s ease-in-out;
+      max-width: 600px;
+      padding: 20px;
+      text-align: left;
+      margin-right: 5%;
     }
     h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 3em;
+      margin-bottom: 0.5em;
     }
     p {
-      font-size: 1.2rem;
-      opacity: 0.85;
+      font-size: 1.2em;
+      margin-bottom: 1.5em;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .footer {
+      font-size: 0.9em;
+      opacity: 0.8;
+      margin-top: 2em;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🚀 Coming Soon</h1>
-    <p>Something exciting is on the way. Stay tuned!</p>
+    <p>This page is under construction. Stay tuned!</p>
+    <div class="footer">© 2025 Haiyang Xu</div>
   </div>
 </body>
 </html>
