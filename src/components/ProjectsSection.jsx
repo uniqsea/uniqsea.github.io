@@ -19,9 +19,10 @@ const SectionHeader = styled.div`
 `
 
 const ProjectGrid = styled.div`
-  display: grid; 
-  gap: 48px; 
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* prevent long content from forcing track width */
+  align-items: start;
 `
 
 // card moved to its own component

@@ -1,21 +1,28 @@
 import styled from 'styled-components'
 import { useParams, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { NavBar } from '../components/NavBar.jsx'
 import { Page, Max } from '../components/Layout.jsx'
 import { projects } from '../data.js'
 import { slugify } from '../utils/slug.js'
 import { Badge } from '../components/Badge.jsx'
+import ReactMarkdown from 'react-markdown'
 
 const Header = styled.header`
-  padding: 48px 0 24px;
+  padding: 56px 0 24px; text-align: center;
 `
 
 const Title = styled.h1`
-  margin: 0 0 8px; font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.2rem);
+`
+
+const SubTitle = styled.p`
+  margin: 0; color: var(--muted); font-size: 1.1rem;
 `
 
 const Meta = styled.div`
-  color: var(--muted); font-size: 0.95rem; display: flex; gap: 10px; flex-wrap: wrap;
+  color: var(--muted); font-size: 0.95rem; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  margin-top: 8px;
 `
 
 const Cover = styled.div`
@@ -24,7 +31,10 @@ const Cover = styled.div`
 `
 
 const Body = styled.section`
-  display: grid; gap: 16px; padding: 28px 0 80px;
+  display: grid; gap: 16px; padding: 28px 0 80px; max-width: 900px; margin: 0 auto;
+  .md p { line-height: 1.9; color: var(--muted); }
+  .md h2, .md h3 { margin: 22px 0 8px; }
+  .md ul { padding-left: 1.2em; }
 `
 
 const Row = styled.div`
@@ -48,6 +58,7 @@ export default function ProjectPage() {
           <>
             <Header>
               <Title>{project.title}</Title>
+              {project.subtitle && <SubTitle>{project.subtitle}</SubTitle>}
               <Meta>
                 {project.org && <span>{project.org}</span>}
                 {project.year && <span>· {project.year}</span>}
@@ -56,8 +67,13 @@ export default function ProjectPage() {
             </Header>
             <Cover>{(project.cover || project.thumb) && <img src={project.cover || project.thumb} alt={project.title} />}</Cover>
             <Body>
-              {project.summary && <p>{project.summary}</p>}
-              {project.impact && <p><strong>Impact:</strong> {project.impact}</p>}
+              {project.overview && (
+                <section>
+                  <h2 style={{ margin: '24px 0 8px' }}>Overview</h2>
+                  <p>{project.overview}</p>
+                </section>
+              )}
+              <MarkdownSection project={project} />
               {Array.isArray(project.stack) && project.stack.length > 0 && (
                 <Row>
                   {project.stack.map(tech => (<Badge key={tech}>{tech}</Badge>))}
@@ -81,3 +97,31 @@ export default function ProjectPage() {
   )
 }
 
+function MarkdownSection({ project }) {
+  const [content, setContent] = useState('')
+  useEffect(() => {
+    let active = true
+    async function load() {
+      try {
+        if (project?.bodyPath) {
+          const res = await fetch(project.bodyPath)
+          const text = await res.text()
+          if (active) setContent(text)
+        } else if (project?.body) {
+          setContent(project.body)
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+    load()
+    return () => { active = false }
+  }, [project?.bodyPath])
+
+  if (!content) return null
+  return (
+    <section className="md">
+      <ReactMarkdown>{content}</ReactMarkdown>
+    </section>
+  )
+}

@@ -53,8 +53,19 @@ const Description = styled.p`
 
 const SocialRow = styled.div`
   margin-top: 22px; display: flex; gap: 10px;
-  a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); color: var(--fg); text-decoration: none; }
-  a:hover { background: var(--fg); color: var(--bg); }
+  a { 
+    display: inline-flex; align-items: center; justify-content: center; 
+    width: 36px; height: 36px; border-radius: 10px; 
+    border: 1px solid var(--border); color: var(--fg); text-decoration: none; 
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; 
+    will-change: transform; 
+  }
+  a:hover { 
+    transform: translateY(-2px) scale(1.05); 
+    border-color: var(--fg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+  a:active { transform: translateY(0) scale(0.97); }
   img { filter: invert(0); }
 `
 
@@ -80,11 +91,14 @@ export function HeroSection({ maxWidth: Max }) {
             <Description>{site.blurb}</Description>
             {/* CTA and topic tags removed */}
             <SocialRow>
-              {socials.filter(s => ['github','email'].includes(s.icon)).map(s => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label}>
-                  <Icon name={s.icon} size={16} />
-                </a>
-              ))}
+              {['linkedin','github','email'].map(name => {
+                const s = socials.find(x => x.icon === name)
+                return s ? (
+                  <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label}>
+                    <Icon name={name} size={16} />
+                  </a>
+                ) : null
+              })}
             </SocialRow>
           </Lead>
           <PhotoWrap aria-label="Portrait">

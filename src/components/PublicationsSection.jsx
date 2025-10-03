@@ -27,16 +27,17 @@ const List = styled.ol`
 
 const Row = styled.li`
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 20px;
+  grid-template-columns: minmax(240px, 1fr) 3fr; /* thumbnail >= 1/4 */
+  gap: 24px;
   align-items: start;
+  @media (max-width: 900px) { grid-template-columns: minmax(200px, 1fr) 2fr; }
   @media (max-width: 700px) { grid-template-columns: 1fr; }
 `
 
 const Thumb = styled.div`
   width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: 12px;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
   overflow: hidden;
   background: var(--bg-alt);
   img { width: 100%; height: 100%; object-fit: cover; display: block; }

@@ -10,8 +10,7 @@ export default function App(){
       <Route path="/" element={<Home />} />
       <Route path="/projects" element={<Projects />} />
       <Route path="/projects/:slug" element={<ProjectPage />} />
-      {/* <Route path="/publications" element={<Publications />} /> */}
-      <Route path=":slug" element={<ProjectPage />} />
+      <Route path="/publications" element={<Publications />} />
       <Route path="*" element={<Home />} />
     </Routes>
   )

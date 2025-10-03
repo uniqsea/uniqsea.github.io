@@ -3,16 +3,17 @@ import { Badge, Dot } from './Badge.jsx'
 
 const Row = styled.li`
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 20px;
+  grid-template-columns: minmax(260px, 1fr) 3fr; /* make thumbnail ≈ 1/4 */
+  gap: 24px;
   align-items: start;
+  @media (max-width: 900px) { grid-template-columns: minmax(200px, 1fr) 2fr; }
   @media (max-width: 700px) { grid-template-columns: 1fr; }
 `
 
 const Thumb = styled.div`
   width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: 12px;
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
   overflow: hidden;
   background: var(--bg-alt);
   img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -51,13 +52,7 @@ const Award = styled.div`
 
 export function PublicationCard({ pub }) {
   const thumb = pub.thumb || '/sea.PNG'
-  const links = []
-  if (pub.doi) links.push({ label: 'DOI', href: `https://doi.org/${pub.doi}`, tone: 'info' })
-  if (pub.pdf) links.push({ label: 'PDF', href: pub.pdf, tone: 'danger' })
-  if (pub.bibtex) links.push({ label: 'BibTeX', href: pub.bibtex, tone: 'success' })
-  if (pub.link) links.push({ label: 'Web', href: pub.link, tone: 'amber' })
-  if (pub.github) links.push({ label: 'GitHub', href: pub.github, tone: 'gold' })
-  if (pub.arxiv) links.push({ label: 'arXiv', href: pub.arxiv, tone: 'amber' })
+  const links = Array.isArray(pub.links) ? pub.links : []
 
   return (
     <Row>
@@ -74,7 +69,7 @@ export function PublicationCard({ pub }) {
         {links.length > 0 && (
           <Badges>
             {links.map(l => (
-              <Badge key={l.label} as="a" href={l.href} tone={l.tone} target="_blank" rel="noreferrer">
+              <Badge key={l.label} as="a" href={l.href} tone={l.tone} variant={l.variant} target="_blank" rel="noreferrer">
                 {l.label}
               </Badge>
             ))}
@@ -84,4 +79,3 @@ export function PublicationCard({ pub }) {
     </Row>
   )
 }
-
