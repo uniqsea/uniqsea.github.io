@@ -11,6 +11,6 @@ export function getProjectPath(project) {
   if (!project) return '/projects'
   if (project.path) return project.path
   const slug = project.slug || slugify(project.title || '')
+  // default to projects namespace
   return `/projects/${slug}`
 }
-

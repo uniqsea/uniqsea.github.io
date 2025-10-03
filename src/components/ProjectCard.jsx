@@ -1,18 +1,20 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Badge } from './Badge.jsx'
 import { getProjectPath } from '../utils/slug.js'
+import { Badge } from './Badge.jsx'
 
 const Wrap = styled.article`
-  display: grid; gap: 16px;
+  display: grid; gap: 16px; height: 100%;
 `
 
 const Cover = styled.div`
-  width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden;
+  width: 100%; height: 180px; border-radius: 18px; overflow: hidden;
   background: var(--bg-alt);
   position: relative;
   img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
   &:hover img { transform: scale(1.03); }
+  @media (max-width: 1024px) { height: 160px; }
+  @media (max-width: 700px) { height: 140px; }
 `
 
 const TitleRow = styled.div`
@@ -20,7 +22,8 @@ const TitleRow = styled.div`
 `
 
 const Title = styled.h3`
-  margin: 0; font-size: clamp(1.4rem, 2.2vw, 1.8rem); color: var(--fg); font-weight: 800;
+  margin: 0; font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--fg); font-weight: 800;
+  line-height: 1.3; word-break: break-word; min-width: 0;
 `
 
 const Desc = styled.p`

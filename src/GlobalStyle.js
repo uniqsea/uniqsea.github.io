@@ -2,9 +2,9 @@ import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
     :root {
-    --bg: #ffffff;
+    --bg: #f8f8f8;
     --bg-alt: #fafafa;
-    --surface: #ffffff;
+    --surface: #f8f8f8;
     --surface-hover: #f6f6f6;
     --fg: #111111;
     --muted: #6b7280;
