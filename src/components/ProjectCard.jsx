@@ -8,13 +8,14 @@ const Wrap = styled.article`
 `
 
 const Cover = styled.div`
-  width: 100%; height: 217.62px; border-radius: 18px; overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 10; /* keep consistent 16:10 cover */
+  border-radius: 18px;
+  overflow: hidden;
   background: var(--bg-alt);
   position: relative;
   img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
   &:hover img { transform: scale(1.03); }
-  @media (max-width: 1024px) { height: 160px; }
-  @media (max-width: 700px) { height: 140px; }
 `
 
 const TitleRow = styled.div`

@@ -21,8 +21,17 @@ const SectionHeader = styled.div`
 const ProjectGrid = styled.div`
   display: grid;
   gap: 32px;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); /* prevent long content from forcing track width */
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* desktop: 3 cols */
   align-items: start;
+  /* responsive: tablet = 2 cols, mobile = 1 col */
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 `
 
 // card moved to its own component
