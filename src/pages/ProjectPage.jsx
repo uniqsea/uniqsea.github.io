@@ -118,7 +118,7 @@ function MarkdownSection({ project }) {
     async function load() {
       try {
         // First try to load from src/content by slug via Vite glob
-        const modules = import.meta.glob('../content/projects/*.md', { as: 'raw', eager: true })
+        const modules = import.meta.glob('../content/projects/*.md', { query: '?raw', import: 'default', eager: true })
         const key = Object.keys(modules).find(k => k.endsWith(`/${project.slug}.md`))
         if (key) {
           if (active) setContent(modules[key])
