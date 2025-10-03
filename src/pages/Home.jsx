@@ -15,7 +15,10 @@ export default function Home() {
       <PublicationsSection maxWidth={Max} />
       <ProjectsSection maxWidth={Max} />
       <Footer>
-        <Max>{`© ${new Date().getFullYear()} ${site?.name || 'uniqsea'} · ${domainNote}`}</Max>
+        <Max>
+        <div>© {new Date().getFullYear()} {site?.name || 'uniqsea'}</div>
+        <div>{domainNote}</div>
+        </Max>
       </Footer>
     </Page>
   )
