@@ -9,20 +9,21 @@ import { Badge } from '../components/Badge.jsx'
 import ReactMarkdown from 'react-markdown'
 
 const Header = styled.header`
-  padding: 56px 0 24px; text-align: center;
+  padding: 64px 0 24px; text-align: center;
 `
 
 const Title = styled.h1`
-  margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: 0 0 12px; font-size: clamp(2.2rem, 5.2vw, 3.4rem);
 `
 
 const SubTitle = styled.p`
-  margin: 0; color: var(--muted); font-size: 1.1rem;
+  margin: 0 auto 10px; color: var(--muted); font-size: 1.1rem; line-height: 1.7;
+  max-width: 900px; text-align: center;
 `
 
 const Meta = styled.div`
   color: var(--muted); font-size: 0.95rem; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
-  margin-top: 8px;
+  margin-top: 6px;
 `
 
 const Cover = styled.div`
@@ -31,14 +32,28 @@ const Cover = styled.div`
 `
 
 const Body = styled.section`
-  display: grid; gap: 16px; padding: 28px 0 80px; max-width: 900px; margin: 0 auto;
-  .md p { line-height: 1.9; color: var(--muted); }
-  .md h2, .md h3 { margin: 22px 0 8px; }
+  display: grid; gap: 18px; padding: 32px 0 96px; max-width: 1040px; margin: 0 auto; /* 对称边距更宽 */
+  .md { color: var(--fg); overflow-wrap: anywhere; word-break: break-word; }
+  .md p { line-height: 1.9; color: var(--fg); max-width: 100%; white-space: normal; }
+  .md li { color: var(--fg); }
+  .md a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+  .md h2 { margin: 28px 0 10px; font-size: clamp(1.6rem, 3vw, 2.1rem); }
+  .md h3 { margin: 20px 0 8px; font-size: clamp(1.15rem, 2.2vw, 1.35rem); }
   .md ul { padding-left: 1.2em; }
 `
 
 const Row = styled.div`
   display: flex; gap: 8px; flex-wrap: wrap;
+`
+
+const Notes = styled.div`
+  color: var(--fg);
+  line-height: 1.8;
+`
+
+const BottomBack = styled.div`
+  margin-top: 32px;
+  text-align: left;
 `
 
 export default function ProjectPage() {
@@ -67,16 +82,13 @@ export default function ProjectPage() {
             </Header>
             <Cover>{(project.cover || project.thumb) && <img src={project.cover || project.thumb} alt={project.title} />}</Cover>
             <Body>
-              {project.overview && (
-                <section>
-                  <h2 style={{ margin: '24px 0 8px' }}>Overview</h2>
-                  <p>{project.overview}</p>
-                </section>
-              )}
               <MarkdownSection project={project} />
-              {Array.isArray(project.stack) && project.stack.length > 0 && (
+              {project.notes && (
+                <Notes dangerouslySetInnerHTML={{ __html: project.notes }} />
+              )}
+              {Array.isArray(project.tags) && project.tags.length > 0 && (
                 <Row>
-                  {project.stack.map(tech => (<Badge key={tech}>{tech}</Badge>))}
+                  {project.tags.map(tag => (<Badge key={tag}>{tag}</Badge>))}
                 </Row>
               )}
               {Array.isArray(project.links) && project.links.length > 0 && (
@@ -88,7 +100,9 @@ export default function ProjectPage() {
                   ))}
                 </Row>
               )}
-              <Meta><Link to="/projects">← Back to Projects</Link></Meta>
+              <BottomBack>
+                <Link to="/projects">← Back to Projects</Link>
+              </BottomBack>
             </Body>
           </>
         )}
@@ -103,20 +117,29 @@ function MarkdownSection({ project }) {
     let active = true
     async function load() {
       try {
+        // First try to load from src/content by slug via Vite glob
+        const modules = import.meta.glob('../content/projects/*.md', { as: 'raw', eager: true })
+        const key = Object.keys(modules).find(k => k.endsWith(`/${project.slug}.md`))
+        if (key) {
+          if (active) setContent(modules[key])
+          return
+        }
+        // Fallback: fetch from public if bodyPath is provided
         if (project?.bodyPath) {
           const res = await fetch(project.bodyPath)
           const text = await res.text()
           if (active) setContent(text)
-        } else if (project?.body) {
-          setContent(project.body)
+          return
         }
+        // Fallback: inline body
+        if (project?.body) setContent(project.body)
       } catch (e) {
         // ignore
       }
     }
     load()
     return () => { active = false }
-  }, [project?.bodyPath])
+  }, [project?.slug, project?.bodyPath])
 
   if (!content) return null
   return (

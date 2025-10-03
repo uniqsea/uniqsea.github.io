@@ -8,7 +8,7 @@ const Wrap = styled.article`
 `
 
 const Cover = styled.div`
-  width: 100%; height: 180px; border-radius: 18px; overflow: hidden;
+  width: 100%; height: 217.62px; border-radius: 18px; overflow: hidden;
   background: var(--bg-alt);
   position: relative;
   img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
@@ -36,7 +36,7 @@ const Meta = styled.div`
 `
 
 export function ProjectCard({ project }) {
-  const cover = project.thumb || project.cover || '/sea.PNG'
+  const cover = project.thumb || project.cover || '/sea.png'
   const label = project.label || (project.status ? project.status : null)
   const to = getProjectPath(project)
   return (

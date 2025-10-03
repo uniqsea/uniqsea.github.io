@@ -1,22 +1,24 @@
 import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
 import { Badge, Dot } from './Badge.jsx'
 
 const Row = styled.li`
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) 3fr; /* make thumbnail ≈ 1/4 */
-  gap: 24px;
+  grid-template-columns: 1fr 2fr; /* cover takes 1/3 width, content 2/3 */
+  gap: 28px;
   align-items: start;
-  @media (max-width: 900px) { grid-template-columns: minmax(200px, 1fr) 2fr; }
   @media (max-width: 700px) { grid-template-columns: 1fr; }
 `
 
 const Thumb = styled.div`
   width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 0;
+  height: 180px; /* match project cover height */
+  border-radius: 0; /* keep square corners as requested */
   overflow: hidden;
   background: var(--bg-alt);
   img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 1024px) { height: 160px; }
+  @media (max-width: 700px) { height: 140px; }
 `
 
 const Content = styled.div`
@@ -51,8 +53,9 @@ const Award = styled.div`
 `
 
 export function PublicationCard({ pub }) {
-  const thumb = pub.thumb || '/sea.PNG'
+  const thumb = pub.thumb || '/sea.png'
   const links = Array.isArray(pub.links) ? pub.links : []
+  const authorsText = pub.authors || ''
 
   return (
     <Row>
@@ -64,8 +67,20 @@ export function PublicationCard({ pub }) {
         <TopLine>
           <Title>{pub.title}</Title>
         </TopLine>
-        {pub.authors && <Authors>{pub.authors}</Authors>}
-        <Meta>{pub.venue}{pub.year ? ` ${pub.year}` : ''}{pub.volume ? `, ${pub.volume}` : ''}</Meta>
+        {pub.authorsHtml ? (
+          <Authors dangerouslySetInnerHTML={{ __html: pub.authorsHtml }} />
+        ) : pub.authorsMd ? (
+          <Authors className="md"><ReactMarkdown>{pub.authorsMd}</ReactMarkdown></Authors>
+        ) : (
+          authorsText && <Authors>{authorsText}</Authors>
+        )}
+        {pub.venueHtml ? (
+          <Meta dangerouslySetInnerHTML={{ __html: pub.venueHtml }} />
+        ) : pub.venueMd ? (
+          <Meta className="md"><ReactMarkdown>{pub.venueMd}</ReactMarkdown></Meta>
+        ) : (
+          <Meta>{pub.venue}{pub.year ? ` ${pub.year}` : ''}{pub.volume ? `, ${pub.volume}` : ''}</Meta>
+        )}
         {links.length > 0 && (
           <Badges>
             {links.map(l => (

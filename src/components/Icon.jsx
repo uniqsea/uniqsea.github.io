@@ -1,7 +1,7 @@
 import React from 'react'
-import GitHubIcon from '../assets/github-mark.svg'
-import EmailIcon from '../assets/email.svg'
-import LinkedInIcon from '../assets/linkedin.svg'
+import GitHubIcon from '../assets/icons/github-mark.svg'
+import EmailIcon from '../assets/icons/email.svg'
+import LinkedInIcon from '../assets/icons/linkedin.svg'
 
 const icons = {
   github: GitHubIcon,
