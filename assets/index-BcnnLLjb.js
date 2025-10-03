@@ -284,13 +284,14 @@ Please change the parent <Route path="${w}"> to <Route path="${w==="/"?"*":`${w}
 `;function PS({maxWidth:t}){return Kv?.length?H.jsx(nz,{id:"publications",children:H.jsxs(t,{children:[H.jsx(iz,{children:H.jsx("h2",{children:"Publications"})}),H.jsx(rz,{children:Kv.map(n=>H.jsx(ez,{pub:n},n.id||n.title))})]})}):null}function HS(t=""){return String(t).toLowerCase().trim().replace(/[^a-z0-9\s-]/g,"").replace(/\s+/g,"-").replace(/-+/g,"-")}function az(t){return t?t.path?t.path:`/projects/${t.slug||HS(t.title||"")}`:"/projects"}const lz=ct.article`
   display: grid; gap: 16px; height: 100%;
 `,sz=ct.div`
-  width: 100%; height: 217.62px; border-radius: 18px; overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 10; /* keep consistent 16:10 cover */
+  border-radius: 18px;
+  overflow: hidden;
   background: var(--bg-alt);
   position: relative;
   img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
   &:hover img { transform: scale(1.03); }
-  @media (max-width: 1024px) { height: 160px; }
-  @media (max-width: 700px) { height: 140px; }
 `,oz=ct.div`
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 `,uz=ct.h3`
@@ -316,8 +317,17 @@ Please change the parent <Route path="${w}"> to <Route path="${w==="/"?"*":`${w}
 `,mz=ct.div`
   display: grid;
   gap: 32px;
-  grid-template-columns: repeat(3, minmax(0, 1fr)); /* prevent long content from forcing track width */
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* desktop: 3 cols */
   align-items: start;
+  /* responsive: tablet = 2 cols, mobile = 1 col */
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 `;function qS({maxWidth:t}){return H.jsx(dz,{id:"projects",children:H.jsxs(t,{children:[H.jsx(pz,{children:H.jsx("h2",{children:"Selected Projects"})}),H.jsx(mz,{children:rS.map(n=>H.jsx(hz,{project:n},n.title))})]})})}const Eu=ct.div`
   position: relative;
   padding-top: 72px; /* space for fixed navbar */
