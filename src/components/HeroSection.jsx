@@ -102,7 +102,7 @@ export function HeroSection({ maxWidth: Max }) {
             </SocialRow>
           </Lead>
           <PhotoWrap aria-label="Portrait">
-            <img src="/sea.png" alt={site.fullName || 'Portrait'} />
+            <img src="/sea.PNG" alt={site.fullName || 'Portrait'} />
           </PhotoWrap>
         </Grid>
       </Max>
