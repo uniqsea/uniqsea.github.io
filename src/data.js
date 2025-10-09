@@ -59,7 +59,7 @@ export const publications = [
     year: '2025',
     thumb: bioralCover,
     award: '',
-    tags: ['Peer-reviewed', 'HCI'],
+    tags: ['Demo', 'HCI'],
     links: [
       { label: 'DOI', href: 'https://doi.org/10.1145/3706599.3721178', tone: 'info' },
       { label: 'PDF', href: '/publication/3706599.3721178.pdf', tone: 'danger' },
