@@ -45,7 +45,7 @@ export const projects = [
       // { label: 'Demo', href: 'https://example.com/demo' },
       // { label: 'Source Code', href: 'https://github.com/...' },
     ],
-    // notes: '<p><strong>This project is supervised by </strong></p>',
+    notes: '<p>This project was completed under the guidance of <strong>Niels Olof Bouvin</strong>, a truly wonderful and kind person, <em>in memory of him</em>.</p>',
   },
 ]
 
