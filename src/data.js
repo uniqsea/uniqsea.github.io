@@ -31,7 +31,7 @@ export const projects = [
   {
     slug: 'visionnav',
     title: 'VisionNav',
-    subtitle: 'Revolutionizing Walking Experiences with an Intelligent Vibration-Guided Navigation Companion.',
+    subtitle: 'Revolutionizing Walking Experiences with an Intelligent Vibration-Guided Navigation Companion',
     summary: 'An assistive navigation system integrating IoT and computer vision to deliver real-time obstacle detection, path recognition, and intuitive vibration feedback through wearable M5Stack devices.',
     status: 'COURSE PROJECT',
     org: 'Aarhus University',
