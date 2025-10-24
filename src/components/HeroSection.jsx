@@ -37,6 +37,7 @@ const Title = styled.h1`
   white-space: nowrap; /* single line */
   display: block;
   padding-block: 0.08em; /* extra breathing room for ascenders/descenders */
+  min-height: 1.15em; /* 防止文字变化时高度跳动 */
 `
 
 // no subtitle per user request
@@ -88,12 +89,37 @@ const PhotoWrap = styled.div`
 
 export function HeroSection({ maxWidth: Max }) {
   const preferred = site.preferredName || site.fullName?.split(' ').slice(-1)[0] || site.name
+  const fullText = `Hello, I'm ${preferred}`
+
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: (i) => ({
+      opacity: 1,
+      transition: {
+        delay: i * 0.05,
+      },
+    }),
+  }
+
   return (
     <Hero id="hero">
       <Max>
         <Grid>
           <Lead>
-            <Title>Hello, I’m {preferred}</Title>
+            <Title>
+              {fullText.split('').map((char, index) => (
+                <motion.span
+                  key={index}
+                  custom={index}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textVariants}
+                  style={{ display: 'inline-block' }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </motion.span>
+              ))}
+            </Title>
             <Description>
               {site.blurb.split('\n').map((line, index) => (
                 <span key={index}>
