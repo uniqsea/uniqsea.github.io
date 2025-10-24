@@ -3,7 +3,7 @@ import { projects } from '../data.js'
 import { ProjectCard as ProjectCardView } from './ProjectCard.jsx'
 
 const Section = styled.section`
-  padding: 100px 0;
+  padding: 64px 0;
   position: relative;
 `
 
@@ -12,6 +12,7 @@ const SectionHeader = styled.div`
   text-align: left;
   
   h2 { 
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     margin: 0; 
     font-size: clamp(2rem, 4vw, 3rem);
     color: var(--fg);

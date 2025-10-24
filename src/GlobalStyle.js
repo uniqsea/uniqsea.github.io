@@ -49,7 +49,7 @@ export const GlobalStyle = createGlobalStyle`
   
   body { 
     margin: 0; 
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; 
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif; 
     background: var(--bg); 
     color: var(--fg); 
     line-height: 1.7; 
@@ -66,8 +66,6 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--fg);
     font-feature-settings: "liga", "kern", "onum";
   }
-  /* Minimal: keep a single sans family throughout */
-  h1, h2, h3 { font-family: inherit; }
   
   h1 { font-size: clamp(2.6rem, 5vw, 3.8rem); letter-spacing: -0.035em; }
   h2 { font-size: clamp(2rem, 4vw, 2.5rem); }

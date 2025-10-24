@@ -5,10 +5,9 @@ import { site, socials } from '../data.js'
 import { Icon } from './Icon.jsx'
 
 const Hero = styled.header`
-  min-height: calc(100vh - 72px);
   display: flex;
   align-items: center;
-  padding: 72px 0;
+  padding: 80px 0 64px;
   position: relative;
 `
 
@@ -28,6 +27,7 @@ const Grid = styled.div`
 `
 
 const Title = styled.h1`
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: clamp(1.6rem, 8vw, 5rem);
   line-height: 1.15; /* avoid glyph clipping */
   letter-spacing: -0.02em;
@@ -42,11 +42,16 @@ const Title = styled.h1`
 // no subtitle per user request
 
 const Description = styled.p`
-  max-width: 760px;
+  max-width: 640px;
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  line-height: 1.75;
   margin: 0 0 18px;
+  text-align: left;
+  
+  @media (max-width: 640px) {
+    max-width: 100%;
+  }
 `
 
 // removed CTA and topic tags per request
@@ -76,7 +81,8 @@ const PhotoWrap = styled.div`
   border: 1px solid var(--border);
   background: var(--surface);
   overflow: hidden;
-  @media (max-width: 480px) { width: 220px; height: 220px; }
+  @media (max-width: 860px) { width: 240px; height: 240px; }
+  @media (max-width: 480px) { width: 200px; height: 200px; }
   img { width: 100%; height: 100%; object-fit: cover; display: block; }
 `
 
@@ -88,8 +94,14 @@ export function HeroSection({ maxWidth: Max }) {
         <Grid>
           <Lead>
             <Title>Hello, I’m {preferred}</Title>
-            <Description>{site.blurb}</Description>
-            {/* CTA and topic tags removed */}
+            <Description>
+              {site.blurb.split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < site.blurb.split('\n').length - 1 && <br />}
+                </span>
+              ))}
+            </Description>
             <SocialRow>
               {['linkedin','github','email'].map(name => {
                 const s = socials.find(x => x.icon === name)
