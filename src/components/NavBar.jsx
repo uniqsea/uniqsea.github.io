@@ -21,7 +21,10 @@ const NavInner = styled.div`
   padding: 12px 24px;
   max-width: 1200px;
   margin: 0 auto;
-  @media (max-width: 640px) { padding: 10px 16px; }
+  @media (max-width: 640px) { 
+    padding: 8px 16px; 
+    gap: 8px;
+  }
 `
 
 const Brand = styled(Link)`
@@ -41,15 +44,25 @@ const LogoMark = styled.span`
 
 const BrandText = styled.span`
   display: flex; flex-direction: column; line-height: 1.1;
-  .name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  .name { 
+    font-size: clamp(16px, 4vw, 20px); 
+    font-weight: 700; 
+    letter-spacing: -0.02em; 
+  }
   /* no subtitle line */
 `
 
 const Pills = styled.ul`
-  display: flex; align-items: center; gap: 6px; list-style: none; margin: 0; padding: 2px;
+  display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 2px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 999px;
+  
+  @media (max-width: 640px) {
+    gap: 2px;
+    padding: 1px;
+  }
 `
 
 const NavItem = styled.li`
@@ -57,12 +70,18 @@ const NavItem = styled.li`
   a {
     position: relative;
     display: inline-block;
-    padding: 8px 14px;
-    font-size: 13px; font-weight: 600;
+    padding: 6px 12px;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(12px, 3vw, 15px); 
+    font-weight: 600;
     color: var(--muted);
     text-decoration: none;
     border-radius: 999px;
     transition: color 0.2s ease;
+    
+    @media (max-width: 640px) {
+      padding: 6px 10px;
+    }
   }
   a:hover { color: var(--fg); }
 `
@@ -95,7 +114,7 @@ export function NavBar() {
                           position: 'absolute', inset: 0, borderRadius: 999,
                           background: 'var(--fg)',
                         }}
-                        transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 30, duration: 0.3 }}
                       />
                     )}
                     <span style={{ position: 'relative', zIndex: 1, color: isActive ? 'var(--bg)' : 'inherit' }}>

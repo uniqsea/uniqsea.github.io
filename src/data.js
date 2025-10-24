@@ -11,7 +11,8 @@ export const site = {
   location: 'Earth · Remote',
   email: 'au777937@uni.au.dk', 
   // blurb: `I am currently a master's student studying Computer Science at Aarhus University, Denmark, focusing on Human-Computer Interaction. I care about how technology feels to use, especially for specific communities. My work turns complex systems into calm, respectful interfaces that support everyday wellbeing.`,
-  blurb:`I am currently a Master's student in Computer Science at Aarhus University, specializing in Human-Computer Interaction. My interests lie in how technology can enhance human experiences in everyday life, particularly within certain communities. I am passionate about human-centered design and about creating interfaces that transform technology into creative and meaningful experiences that actively support people’s well-being.`,
+  blurb: `I am currently a Master's student in Computer Science at Aarhus University, specializing in Human-Computer Interaction. 
+  My interests lie in how technology can enhance human experiences in everyday life, particularly within certain communities. I am passionate about human-centered design and about creating interfaces that transform technology into creative and meaningful experiences that actively support people's well-being.`,
   cvUrl: '#', // optional: link to CV PDF
   domainNote: 'uniqsea = unique + sea. Every wave is unique, so are people.'
 }
@@ -45,7 +46,9 @@ export const projects = [
       // { label: 'Demo', href: 'https://example.com/demo' },
       // { label: 'Source Code', href: 'https://github.com/...' },
     ],
-    notes: '<p>This project was completed under the guidance of <strong>Niels Olof Bouvin</strong>, a truly wonderful and kind person, <em>in memory of him</em>.</p>',
+    notes: `<p style="margin: 0; line-height: 1.8; font-size: 1.15rem; color: var(--fg); text-align: center; font-family: 'Georgia', 'Times New Roman', serif; letter-spacing: 0.01em;">
+      This project was completed under the guidance of the late <strong style="font-weight: 600;">Niels Olof Bouvin</strong>, a truly wonderful and kind person, <em style="font-style: italic;">whom we dearly miss</em>.
+    </p>`,
   },
 ]
 
