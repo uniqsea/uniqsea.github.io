@@ -70,3 +70,82 @@ export const publications = [
     ],
   }
 ]
+
+// Photography moments
+export const moments = [
+  // Sample data - replace with your own photos
+  // 优先使用本地 image 路径，没有本地路径才用 url（图床）
+  {
+    id: 'm1',
+    image: '/moments/photo1.png',  // 本地路径（优先）
+    // url: 'https://your-cdn.com/photo1.jpg',  // 图床 URL（可选，只在没有 image 时使用）
+    caption: 'Golden hour at the beach',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm2',
+    image: '/moments/photo3.png',
+    caption: 'Child riding a bike',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm3',
+    image: '/moments/photo2.png',
+    caption: 'Plane flying over the ocean',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm4',
+    image: '/moments/photo4.png',
+    caption: 'Seagulls flying over the church tower',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm5',
+    image: '/moments/photo5.png',
+    caption: 'Lonely bench in the sun',
+    location: 'Deer Park, Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm6',
+    image: '/moments/photo6.png',
+    caption: 'Balcony in the sun',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm7',
+    image: '/moments/photo7.png',
+    caption: 'Evening sunset',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm8',
+    image: '/moments/photo8.png',
+    caption: 'Beautiful seaside buildings',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm9',
+    image: '/moments/photo9.png',
+    caption: 'Green Watchtower',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-26',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+]

@@ -90,6 +90,7 @@ const navItems = [
   { to: '/', label: 'Home' },
   { to: '/projects', label: 'Projects' },
   { to: '/publications', label: 'Publication' },
+  { to: '/moments', label: 'Moments' },
 ]
 
 export function NavBar() {
