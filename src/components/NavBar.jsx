@@ -88,8 +88,8 @@ const NavItem = styled.li`
 
 const navItems = [
   { to: '/', label: 'Home' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/publications', label: 'Publication' },
+  // { to: '/projects', label: 'Projects' },  // 暂时隐藏
+  // { to: '/publications', label: 'Publication' },  // 暂时隐藏
   { to: '/moments', label: 'Moments' },
 ]
 
