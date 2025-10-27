@@ -53,24 +53,39 @@ const Meta = styled.div`
 export function PhotoCard({ photo }) {
   const [showInfoOverlay, setShowInfoOverlay] = useState(false)
   
-  // Check if photo has any info to display
-  // showInfo 为 false 时强制隐藏，未设置或为 true 时显示（如果有内容）
-  const hasInfo = (photo.caption || photo.location || photo.date) && photo.showInfo !== false
+  // Determine info display mode
+  // Backward compatible with `showInfo` (boolean)
+  // New API:
+  //   - showInfoDetailed: true 显示标题(如有) + 时间/地点
+  //   - showInfoBrief: true 仅显示时间/地点
+  // 优先级：detailed > brief；任一显式为 true 则按照对应模式展示。
+  // 若两者均未设置，则遵循旧逻辑：showInfo !== false 时显示详细信息（若有内容）。
+  const wantsDetailed = photo.showInfoDetailed === true
+  const wantsBrief = !wantsDetailed && photo.showInfoBrief === true
+  const fallbackDetailed =
+    photo.showInfoDetailed === undefined &&
+    photo.showInfoBrief === undefined &&
+    photo.showInfo !== false // undefined 或 true 都当作显示
+  const displayDetailed = wantsDetailed || fallbackDetailed
+  const displayBrief = wantsBrief
+
+  const hasMeta = photo.location || photo.date
+  const hasAnyInfo = (displayDetailed && (photo.caption || hasMeta)) || (displayBrief && hasMeta)
   
   // 优先使用本地 image，没有本地路径才用 url（图床）
   const imageSrc = photo.image || photo.url
   
   return (
     <Card
-      onMouseEnter={() => hasInfo && setShowInfoOverlay(true)}
+      onMouseEnter={() => hasAnyInfo && setShowInfoOverlay(true)}
       onMouseLeave={() => setShowInfoOverlay(false)}
     >
       <Image src={imageSrc} alt={photo.caption || 'Photo'} loading="lazy" />
       
-      {hasInfo && (
+      {hasAnyInfo && (
         <InfoOverlay $visible={showInfoOverlay}>
-          {photo.caption && <Caption>{photo.caption}</Caption>}
-          {(photo.location || photo.date) && (
+          {displayDetailed && photo.caption && <Caption>{photo.caption}</Caption>}
+          {hasMeta && (displayDetailed || displayBrief) && (
             <Meta>
               {photo.location && <span>{photo.location}</span>}
               {photo.location && photo.date && <span>·</span>}

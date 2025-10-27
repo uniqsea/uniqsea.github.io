@@ -148,4 +148,20 @@ export const moments = [
     date: '2024-10-26',
     showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
   },
+  {
+    id: 'm10',
+    image: '/moments/photo10.png',
+    caption: 'Rain hitting the window',
+    location: 'Munich, Germany',
+    date: '2024-10-13',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
+  {
+    id: 'm11',
+    image: '/moments/photo11.png',
+    caption: 'Signpost in the mountains',
+    location: 'Munich, Germany',
+    date: '2024-10-13',
+    showInfo: false  // 设为 false 可以隐藏悬浮信息，即使有 caption/location/date
+  },
 ]
