@@ -150,7 +150,7 @@ export const moments = [
   },
   {
     id: 'm10',
-    image: '/moments/photo10.png',
+    image: '/moments/photo10.jpg',
     caption: 'Rain hitting the window',
     location: 'Munich, Germany',
     date: '2024-10-13',
@@ -158,7 +158,7 @@ export const moments = [
   },
   {
     id: 'm11',
-    image: '/moments/photo11.png',
+    image: '/moments/photo11.jpg',
     caption: 'Signpost in the mountains',
     location: 'Munich, Germany',
     date: '2024-10-13',
