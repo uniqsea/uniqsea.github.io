@@ -47,7 +47,7 @@ export default function Moments() {
           <Header>
             {/* <Title>Moments</Title> */}
             <Subtitle>
-              Capturing life through the lens.
+              Capturing life through my lens.
             </Subtitle>
           </Header>
           <MasonryGallery photos={moments} />
