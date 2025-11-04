@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { site, socials } from '../data.js'
 import { Icon } from './Icon.jsx'
+import haiyangPhoto from '../assets/haiyang.png'
 
 const Hero = styled.header`
   display: flex;
@@ -77,14 +78,32 @@ const SocialRow = styled.div`
 
 const PhotoWrap = styled.div`
   justify-self: center;
-  width: 280px; height: 280px;
-  border-radius: 16px;
+  width: 300px; height: 300px;
+  border-radius: 150px;
   border: 1px solid var(--border);
   background: var(--surface);
   overflow: hidden;
   @media (max-width: 860px) { width: 240px; height: 240px; }
   @media (max-width: 480px) { width: 200px; height: 200px; }
-  img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+    /* 调整图片位置：第一个值是水平(0-100%)，第二个值是垂直(0-100%) */
+    /* 例如: 50% 30% 表示水平居中，垂直偏上显示 */
+    object-position: 50% 18%;
+    /* 缩放图片：1.0 = 原始大小，1.2 = 放大20%，0.8 = 缩小20% */
+    transform: scale(1);
+    /* 滤镜效果：可以组合多个效果 */
+    /* brightness(1) = 亮度正常，1.2 = 更亮，0.8 = 更暗 */
+    /* contrast(1) = 对比度正常，1.2 = 对比度高，0.8 = 对比度低 */
+    /* saturate(1) = 饱和度正常，1.5 = 更鲜艳，0.5 = 偏灰 */
+    /* grayscale(0) = 彩色，1 = 黑白 */
+    /* sepia(0) = 无复古效果，1 = 复古怀旧 */
+    /* blur(0px) = 无模糊，5px = 模糊 */
+    filter: brightness(1) contrast(1) saturate(1);
+  }
 `
 
 export function HeroSection({ maxWidth: Max }) {
@@ -140,7 +159,7 @@ export function HeroSection({ maxWidth: Max }) {
             </SocialRow>
           </Lead>
           <PhotoWrap aria-label="Portrait">
-            <img src="/sea.png" alt={site.fullName || 'Portrait'} />
+            <img src={haiyangPhoto} alt={site.fullName || 'Portrait'} />
           </PhotoWrap>
         </Grid>
       </Max>
