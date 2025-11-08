@@ -2,7 +2,7 @@
 export const site = {
   name: 'Haiyang Xu',        
   brand: 'uniqsea',          // brand (preferred key)
-  domain: 'uniqsea.com',     // domain
+  domain: 'haiyangxu.me',     // domain
   givenName: 'Haiyang',
   familyName: 'Xu',
   fullName: 'Haiyang Xu',
