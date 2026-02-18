@@ -1,6 +1,8 @@
+import { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import Masonry from 'react-masonry-css'
 import { PhotoCard } from './PhotoCard.jsx'
+import { Lightbox } from './Lightbox.jsx'
 
 const MasonryGrid = styled(Masonry)`
   display: flex;
@@ -38,6 +40,16 @@ const EmptyText = styled.p`
 `
 
 export function MasonryGallery({ photos }) {
+  const [lightboxIndex, setLightboxIndex] = useState(null)
+
+  const openLightbox = useCallback(index => setLightboxIndex(index), [])
+  const closeLightbox = useCallback(() => setLightboxIndex(null), [])
+  const prevPhoto = useCallback(() => setLightboxIndex(i => Math.max(0, i - 1)), [])
+  const nextPhoto = useCallback(
+    () => setLightboxIndex(i => Math.min(photos.length - 1, i + 1)),
+    [photos.length]
+  )
+
   if (!photos || photos.length === 0) {
     return (
       <EmptyState>
@@ -57,15 +69,31 @@ export function MasonryGallery({ photos }) {
   }
   
   return (
-    <MasonryGrid
-      breakpointCols={breakpointColumns}
-      className="masonry-grid"
-      columnClassName="masonry-column"
-    >
-      {photos.map(photo => (
-        <PhotoCard key={photo.id} photo={photo} />
-      ))}
-    </MasonryGrid>
+    <>
+      <MasonryGrid
+        breakpointCols={breakpointColumns}
+        className="masonry-grid"
+        columnClassName="masonry-column"
+      >
+        {photos.map((photo, index) => (
+          <PhotoCard
+            key={photo.id}
+            photo={photo}
+            onCardClick={() => openLightbox(index)}
+          />
+        ))}
+      </MasonryGrid>
+
+      {lightboxIndex !== null && (
+        <Lightbox
+          photos={photos}
+          currentIndex={lightboxIndex}
+          onClose={closeLightbox}
+          onPrev={prevPhoto}
+          onNext={nextPhoto}
+        />
+      )}
+    </>
   )
 }
 
