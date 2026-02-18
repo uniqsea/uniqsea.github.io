@@ -28,7 +28,7 @@ const Grid = styled.div`
 `
 
 const Title = styled.h1`
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--heading-font);
   font-size: clamp(1.6rem, 8vw, 5rem);
   line-height: 1.15; /* avoid glyph clipping */
   letter-spacing: -0.02em;

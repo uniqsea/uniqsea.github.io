@@ -136,8 +136,9 @@ const InfoRow = styled.div`
 
 const InfoCaption = styled.div`
   color: rgba(255, 255, 255, 0.82);
+  font-family: var(--heading-font);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
   flex: 1;
   min-width: 0;

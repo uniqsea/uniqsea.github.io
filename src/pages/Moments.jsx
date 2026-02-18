@@ -16,25 +16,29 @@ const Section = styled.section`
 const Header = styled.header`
   margin-bottom: 60px;
   text-align: center;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
   @media (max-width: 640px) {
     margin-bottom: 40px;
   }
 `
 
-const Title = styled.h1`
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, var(--fg), var(--muted));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+const Rule = styled.div`
+  width: 36px;
+  height: 1px;
+  background: var(--border);
 `
 
 const Subtitle = styled.p`
-  font-size: 1.1rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 1.15rem;
   color: var(--muted);
-  max-width: 600px;
-  margin: 0 auto;
+  letter-spacing: 0.02em;
+  margin: 0;
   line-height: 1.6;
 `
 
@@ -45,10 +49,9 @@ export default function Moments() {
       <Section>
         <Max>
           <Header>
-            {/* <Title>Moments</Title> */}
-            <Subtitle>
-              Capturing life through my lens.
-            </Subtitle>
+            <Rule />
+            <Subtitle>Capturing life through my lens.</Subtitle>
+            <Rule />
           </Header>
           <MasonryGallery photos={moments} />
         </Max>

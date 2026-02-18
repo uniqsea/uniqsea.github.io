@@ -30,9 +30,9 @@ const CaptionOverlay = styled.div`
   padding: 28px 14px 14px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.62), transparent);
   color: rgba(255, 255, 255, 0.92);
+  font-family: var(--heading-font);
   font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-weight: 600;
   pointer-events: none;
   opacity: ${props => props.$visible ? 1 : 0};
   transition: opacity 0.25s ease;
