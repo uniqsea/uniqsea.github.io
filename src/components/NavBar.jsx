@@ -44,7 +44,7 @@ const LogoMark = styled.span`
 
 const BrandText = styled.span`
   display: flex; flex-direction: column; line-height: 1.1;
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--heading-font);
   .name { 
     font-size: clamp(16px, 4vw, 20px); 
     font-weight: 700; 
@@ -71,7 +71,7 @@ const NavItem = styled.li`
     position: relative;
     display: inline-block;
     padding: 6px 12px;
-    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--heading-font);
     font-size: clamp(12px, 3vw, 15px); 
     font-weight: 600;
     color: var(--muted);

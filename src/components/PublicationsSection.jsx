@@ -12,7 +12,7 @@ const SectionHeader = styled.div`
   text-align: left;
   
   h2 { 
-    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--heading-font);
     margin: 0; 
     font-size: clamp(2rem, 4vw, 3rem);
   }

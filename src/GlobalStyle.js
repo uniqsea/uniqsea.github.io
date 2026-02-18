@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     --shadow-lg: none;
     --glass: transparent;
     --glass-border: transparent;
+    --heading-font: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
   @media (prefers-color-scheme: dark) {
@@ -59,6 +60,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6 { 
+    font-family: var(--heading-font);
     font-weight: 600; 
     line-height: 1.2; 
     letter-spacing: -0.02em;

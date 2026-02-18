@@ -11,7 +11,7 @@ export const moments = [
     image: '/moments/photo1.png',
     caption: 'Golden hour at the beach',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-9-7',
     showInfo: false,
   },
   {
@@ -19,7 +19,7 @@ export const moments = [
     image: '/moments/photo3.png',
     caption: 'Between Sea and Sky',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-9-7',
     showInfo: false,
   },
   {
@@ -27,7 +27,7 @@ export const moments = [
     image: '/moments/photo2.png',
     caption: 'Child riding a bike',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-9-7',
     showInfo: false,
   },
   {
@@ -35,7 +35,7 @@ export const moments = [
     image: '/moments/photo4.png',
     caption: 'Seagulls flying over the church tower',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-8-21',
     showInfo: false,
   },
   {
@@ -43,7 +43,7 @@ export const moments = [
     image: '/moments/photo5.png',
     caption: 'Lonely bench in the sun',
     location: 'Deer Park, Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-8-18',
     showInfo: false,
   },
   {
@@ -51,7 +51,7 @@ export const moments = [
     image: '/moments/photo6.png',
     caption: 'Balcony in the sun',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-9-1',
     showInfo: false,
   },
   {
@@ -59,23 +59,23 @@ export const moments = [
     image: '/moments/photo7.png',
     caption: 'Evening sunset',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-9-9',
     showInfo: false,
   },
   {
     id: 'm8',
     image: '/moments/photo8.png',
-    caption: 'Beautiful seaside buildings',
+    caption: 'Seaside buildings',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-9-7',
     showInfo: false,
   },
   {
     id: 'm9',
     image: '/moments/photo9.png',
-    caption: 'Green Watchtower',
+    caption: 'Watchtower',
     location: 'Aarhus, Denmark',
-    date: '2024-10-26',
+    date: '2024-9-7',
     showInfo: false,
   },
   {
