@@ -14,7 +14,7 @@ export const site = {
   blurb: `I am currently a Master's student in Computer Science at Aarhus University, specializing in Human-Computer Interaction. 
   My interests lie in how technology can enhance human experiences in everyday life, particularly within certain communities. I am passionate about human-centered design and about creating interfaces that transform technology into creative and meaningful experiences that actively support people's well-being.`,
   cvUrl: '#', // optional: link to CV PDF
-  domainNote: 'uniqsea = unique + sea. Every wave is unique, so are people.'
+  // domainNote: 'uniqsea = unique + sea. Every wave is unique, so are people.'
 }
 
 export const socials = [
@@ -28,6 +28,7 @@ export const socials = [
 import visionnavCover from './assets/projects/visionnav-cover.svg'
 import bioralCover from './assets/publication/bioral-demo-cover.png'
 
+
 export const projects = [
   {
     slug: 'visionnav',
@@ -40,7 +41,14 @@ export const projects = [
     thumb: visionnavCover,
     cover: visionnavCover,
     bodyPath: '/projects/visionnav.md',
-    tags: ['React Native', 'YOLOv8', 'CNN', 'M5Stack', 'Google Maps API'],
+    // clickType: 'markdown' | 'external' | 'none'
+    // - 'markdown' (default): 点击进入项目详情页并渲染 markdown
+    // - 'external': 点击跳转到 externalUrl（新标签页）
+    // - 'none': 卡片仅展示信息，不可点击
+    clickType: 'markdown',
+    // 如果是 external，可以配置 externalUrl
+    // externalUrl: 'https://example.com',
+    // tags: ['React Native', 'YOLOv8', 'CNN', 'M5Stack', 'Google Maps API'],
     // 只有在这里写链接才会在详情页渲染 Demo / Source Code 徽标
     links: [
       // { label: 'Demo', href: 'https://example.com/demo' },
@@ -49,6 +57,28 @@ export const projects = [
     notes: `<p style="margin: 0; line-height: 1.8; font-size: 1.15rem; color: var(--fg); text-align: center; font-family: 'Georgia', 'Times New Roman', serif; letter-spacing: 0.01em;">
       This project was completed under the guidance of the late <strong style="font-weight: 600;">Niels Olof Bouvin</strong>, a truly wonderful and kind person, <em style="font-style: italic;">whom we dearly miss</em>.
     </p>`,
+  },
+  {
+    slug: 'lets-ceramic',
+    title: "Let's Ceramic",
+    summary: 'A playful AR-based ceramic making experience that explores embodied interaction and creative expression.',
+    status: 'COURSE PROJECT',
+    org: 'Aarhus University',
+    year: '2025',
+    clickType: 'external',
+    externalUrl: 'https://yunhui-song.itch.io/ar-lets-ceramic',
+    // 可以按需补充 thumb / cover / tags
+  },
+  {
+    slug: 'nobody-wants-to-talk-into-a-void',
+    title: 'EchoMind',
+    summary: 'An AI-powered chatbot that helps users reflect on their thoughts and emotions.',
+    status: 'COURSE PROJECT',
+    org: 'Aarhus University',
+    year: '2025',
+    clickType: 'external',
+    externalUrl: 'https://medium.com/@uniqsea/nobody-wants-to-talk-into-a-void-38253448f0c4',
+    // 可以按需补充 thumb / cover / tags
   },
 ]
 
