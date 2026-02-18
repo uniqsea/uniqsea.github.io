@@ -27,7 +27,8 @@ export const socials = [
 
 import visionnavCover from './assets/projects/visionnav-cover.svg'
 import bioralCover from './assets/publication/bioral-demo-cover.png'
-
+import letsCeramicCover from './assets/projects/ceramic-cover.png'
+import EchoMindCover from './assets/projects/echomind-cover.png'
 
 export const projects = [
   {
@@ -67,18 +68,22 @@ export const projects = [
     year: '2025',
     clickType: 'external',
     externalUrl: 'https://yunhui-song.itch.io/ar-lets-ceramic',
+    thumb: letsCeramicCover,
+    cover: letsCeramicCover,
     // 可以按需补充 thumb / cover / tags
   },
   {
     slug: 'nobody-wants-to-talk-into-a-void',
     title: 'EchoMind',
-    summary: 'An AI-powered chatbot that helps users reflect on their thoughts and emotions.',
+    summary: 'An Intelligent Feedback System for Talks and Presentations',
     status: 'COURSE PROJECT',
     org: 'Aarhus University',
     year: '2025',
     clickType: 'external',
     externalUrl: 'https://medium.com/@uniqsea/nobody-wants-to-talk-into-a-void-38253448f0c4',
     // 可以按需补充 thumb / cover / tags
+    thumb: EchoMindCover,
+    cover: EchoMindCover,
   },
 ]
 
