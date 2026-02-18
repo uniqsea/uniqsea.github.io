@@ -35,7 +35,7 @@ export const projects = [
     slug: 'visionnav',
     title: 'VisionNav',
     subtitle: 'Revolutionizing Walking Experiences with an Intelligent Vibration-Guided Navigation Companion',
-    summary: 'An assistive navigation system integrating IoT and computer vision to deliver real-time obstacle detection, path recognition, and intuitive vibration feedback through wearable M5Stack devices.',
+    summary: 'An assistive navigation system integrating IoT and computer vision to deliver real-time obstacle detection, path recognition, and intuitive vibration feedback through wearable devices.',
     status: 'COURSE PROJECT',
     org: 'Aarhus University',
     year: '2024',
@@ -62,7 +62,7 @@ export const projects = [
   {
     slug: 'lets-ceramic',
     title: "Let's Ceramic",
-    summary: 'A playful AR-based ceramic making experience that explores embodied interaction and creative expression.',
+    summary: 'A playful AR-based ceramic making game that explores embodied interaction and creative expression.',
     status: 'COURSE PROJECT',
     org: 'Aarhus University',
     year: '2025',
