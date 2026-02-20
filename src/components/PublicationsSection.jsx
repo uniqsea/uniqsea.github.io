@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { publications } from '../data.js'
+import { publications, publicationsHeaderNoteHtml } from '../data.js'
 import { PublicationCard } from './PublicationCard.jsx'
 
 const Section = styled.section`
@@ -9,13 +9,29 @@ const Section = styled.section`
 
 const SectionHeader = styled.div`
   margin-bottom: 32px;
-  text-align: left;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
   
   h2 { 
     font-family: var(--heading-font);
     margin: 0; 
     font-size: clamp(2rem, 4vw, 3rem);
   }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+`
+
+const HeaderNote = styled.div`
+  font-family: var(--heading-font);
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
 `
 
 const List = styled.ol`
@@ -111,6 +127,9 @@ export function PublicationsSection({ maxWidth: Max }) {
       <Max>
         <SectionHeader>
           <h2>Publications</h2>
+          {publicationsHeaderNoteHtml ? (
+            <HeaderNote dangerouslySetInnerHTML={{ __html: publicationsHeaderNoteHtml }} />
+          ) : null}
         </SectionHeader>
         <List>
           {publications.map(p => (
