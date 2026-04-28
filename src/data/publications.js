@@ -14,8 +14,8 @@ export const publications = [
     award: '',
     tags: ['Poster', 'HCI'],
     links: [
-      // { label: 'DOI', href: 'https://doi.org/10.1145/3706599.3721178', tone: 'info' },
-      // { label: 'PDF', href: '/publication/3706599.3721178.pdf', tone: 'danger' },
+      { label: 'DOI', href: 'https://dl.acm.org/doi/10.1145/3772363.3798371', tone: 'info' },
+      { label: 'PDF', href: '/publication/3772363.3798371.pdf', tone: 'danger' },
       // { label: 'BibTeX', href: '#', tone: 'success' },
     ],
   },
