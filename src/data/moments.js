@@ -94,4 +94,12 @@ export const moments = [
     date: '2024-10-13',
     showInfo: false,
   },
+  {
+    id: 'm12',
+    image: '/moments/photo12.jpg',
+    caption: 'Daytime Ghost',
+    location: 'Aarhus, Denmark',
+    date: '2024-10-22',
+    showInfo: false,
+  },
 ]
