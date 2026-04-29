@@ -45,8 +45,15 @@ export function PhotoCard({ photo, onCardClick }) {
   const [hovered, setHovered] = useState(false)
   const caption = photo.caption
 
-  const imageSrc = photo.image || photo.url
+  const imageSrc = photo.image || photo.url || ''
   const thumbSrc = toThumbPath(imageSrc)
+  const [currentSrc, setCurrentSrc] = useState(thumbSrc)
+
+  function handleImageError() {
+    if (imageSrc && currentSrc !== imageSrc) {
+      setCurrentSrc(imageSrc)
+    }
+  }
   
   return (
     <Card
@@ -54,7 +61,12 @@ export function PhotoCard({ photo, onCardClick }) {
       onMouseLeave={() => setHovered(false)}
       onClick={onCardClick}
     >
-      <Image src={thumbSrc} alt={caption || 'Photo'} loading="lazy" />
+      <Image
+        src={currentSrc}
+        alt={caption || 'Photo'}
+        loading="lazy"
+        onError={handleImageError}
+      />
       {caption && (
         <CaptionOverlay $visible={hovered}>{toTitleCase(caption)}</CaptionOverlay>
       )}
