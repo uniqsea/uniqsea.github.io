@@ -225,17 +225,27 @@ const transition = { duration: 0.24, ease: [0.25, 0.46, 0.45, 0.94] }
 function LightboxImage({ photo }) {
   const [imageLoaded, setImageLoaded] = useState(false)
   const fullSrc = toFullPath(photo)
+  const originalSrc = photo?.image || photo?.url || ''
+  const [currentSrc, setCurrentSrc] = useState(fullSrc)
   const hasInfo = photo?.caption || photo?.location || photo?.date
+
+  const handleImageError = useCallback(() => {
+    if (originalSrc && currentSrc !== originalSrc) {
+      setCurrentSrc(originalSrc)
+      setImageLoaded(false)
+    }
+  }, [currentSrc, originalSrc])
 
   return (
     <ImageWrapper>
       <ImgContainer>
         <Img
-          src={fullSrc}
+          src={currentSrc}
           alt={photo.caption || 'Photo'}
           draggable={false}
           style={{ opacity: imageLoaded ? 1 : 0 }}
           onLoad={() => setImageLoaded(true)}
+          onError={handleImageError}
         />
         {!imageLoaded && <SpinnerWrap />}
       </ImgContainer>
