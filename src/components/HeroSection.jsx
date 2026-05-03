@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'motion/react'
+import Tilt from 'react-parallax-tilt'
 import { Link } from 'react-router-dom'
 import { site, socials } from '../data.js'
 import { Icon } from './Icon.jsx'
 import haiyangPhoto from '../assets/haiyang.png'
+import seaPhoto from '../assets/sea.png'
 
 const Hero = styled.header`
   display: flex;
@@ -76,39 +79,46 @@ const SocialRow = styled.div`
   img { filter: invert(0); }
 `
 
-const PhotoWrap = styled.div`
-  justify-self: center;
+const FlipContainer = styled.div`
   width: 300px; height: 300px;
-  border-radius: 150px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  overflow: hidden;
+  perspective: 800px;
+  cursor: pointer;
+  justify-self: center;
   @media (max-width: 860px) { width: 240px; height: 240px; }
   @media (max-width: 480px) { width: 200px; height: 200px; }
-  img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    display: block;
-    /* 调整图片位置：第一个值是水平(0-100%)，第二个值是垂直(0-100%) */
-    /* 例如: 50% 30% 表示水平居中，垂直偏上显示 */
+`
+
+const FlipInner = styled(motion.div)`
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+`
+
+const PhotoFace = styled.div`
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
     object-position: 50% 18%;
-    /* 缩放图片：1.0 = 原始大小，1.2 = 放大20%，0.8 = 缩小20% */
-    transform: scale(1);
-    /* 滤镜效果：可以组合多个效果 */
-    /* brightness(1) = 亮度正常，1.2 = 更亮，0.8 = 更暗 */
-    /* contrast(1) = 对比度正常，1.2 = 对比度高，0.8 = 对比度低 */
-    /* saturate(1) = 饱和度正常，1.5 = 更鲜艳，0.5 = 偏灰 */
-    /* grayscale(0) = 彩色，1 = 黑白 */
-    /* sepia(0) = 无复古效果，1 = 复古怀旧 */
-    /* blur(0px) = 无模糊，5px = 模糊 */
     filter: brightness(1) contrast(1) saturate(1);
   }
+`
+
+const PhotoBack = styled(PhotoFace)`
+  transform: rotateY(180deg);
+  img { object-position: 50% 50%; }
 `
 
 export function HeroSection({ maxWidth: Max }) {
   const preferred = site.preferredName || site.fullName?.split(' ').slice(-1)[0] || site.name
   const fullText = `Hello, I'm ${preferred}`
+
+  const [flipped, setFlipped] = useState(false)
 
   const textVariants = {
     hidden: { opacity: 0 },
@@ -158,9 +168,26 @@ export function HeroSection({ maxWidth: Max }) {
               })}
             </SocialRow>
           </Lead>
-          <PhotoWrap aria-label="Portrait">
-            <img src={haiyangPhoto} alt={site.fullName || 'Portrait'} />
-          </PhotoWrap>
+          <Tilt
+            tiltMaxAngleDeg={flipped ? 0 : 12}
+            perspective={800}
+            transitionSpeed={400}
+            style={{ justifySelf: 'center' }}
+          >
+            <FlipContainer onClick={() => setFlipped(f => !f)} aria-label="Toggle portrait">
+              <FlipInner
+                animate={{ rotateY: flipped ? 180 : 0 }}
+                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+              >
+                <PhotoFace>
+                  <img src={haiyangPhoto} alt={site.fullName || 'Portrait'} />
+                </PhotoFace>
+                <PhotoBack>
+                  <img src={seaPhoto} alt="sea" />
+                </PhotoBack>
+              </FlipInner>
+            </FlipContainer>
+          </Tilt>
         </Grid>
       </Max>
       {/* subtle animated ocean-like circles (example-inspired) */}
