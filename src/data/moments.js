@@ -102,4 +102,12 @@ export const moments = [
     date: '2024-10-22',
     showInfo: false,
   },
+  {
+    id: 'm13',
+    image: '/moments/photo13.png',
+    caption: 'Chimney',
+    location: 'Armsterdam, Netherlands',
+    date: '2025-10-22',
+    showInfo: false,
+  },
 ]
