@@ -4,6 +4,7 @@ import Projects from './pages/Projects.jsx'
 import Publications from './pages/Publications.jsx'
 import ProjectPage from './pages/ProjectPage.jsx'
 import Moments from './pages/Moments.jsx'
+import Design from './pages/Design.jsx'
 
 export default function App(){
   return (
@@ -13,6 +14,7 @@ export default function App(){
       <Route path="/projects/:slug" element={<ProjectPage />} />
       <Route path="/publications" element={<Publications />} />
       <Route path="/moments" element={<Moments />} />
+      <Route path="/design" element={<Design />} />
       <Route path="*" element={<Home />} />
     </Routes>
   )

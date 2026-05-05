@@ -90,6 +90,7 @@ const navItems = [
   { to: '/', label: 'Home' },
   // { to: '/projects', label: 'Projects' },  // 暂时隐藏
   // { to: '/publications', label: 'Publication' },  // 暂时隐藏
+  { to: '/design', label: 'Design' },
   { to: '/moments', label: 'Moments' },
 ]
 
