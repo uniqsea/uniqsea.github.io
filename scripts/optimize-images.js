@@ -18,9 +18,9 @@ const THUMBS_DIR = path.join(MOMENTS_DIR, 'thumbs')
 const FULL_DIR = path.join(MOMENTS_DIR, 'full')
 
 const THUMB_WIDTH = 800
-const THUMB_QUALITY = 80
+const THUMB_QUALITY = 90
 const FULL_WIDTH = 2400
-const FULL_QUALITY = 85
+const FULL_QUALITY = 90
 
 const SUPPORTED_EXTS = new Set(['.png', '.jpg', '.jpeg', '.webp'])
 // Subdirectories to skip when scanning
@@ -39,6 +39,7 @@ async function processImage(srcPath, destPath, width, quality) {
   const srcSize = fs.statSync(srcPath).size
   await sharp(srcPath)
     .resize({ width, withoutEnlargement: true })
+    .withMetadata()
     .webp({ quality })
     .toFile(destPath)
   const destSize = fs.statSync(destPath).size
