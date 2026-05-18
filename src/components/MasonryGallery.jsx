@@ -49,6 +49,7 @@ export function MasonryGallery({ photos }) {
     () => setLightboxIndex(i => Math.min(photos.length - 1, i + 1)),
     [photos.length]
   )
+  const jumpPhoto = useCallback(index => setLightboxIndex(index), [])
 
   if (!photos || photos.length === 0) {
     return (
@@ -91,6 +92,7 @@ export function MasonryGallery({ photos }) {
           onClose={closeLightbox}
           onPrev={prevPhoto}
           onNext={nextPhoto}
+          onJump={jumpPhoto}
         />
       )}
     </>
