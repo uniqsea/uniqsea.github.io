@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { AnimatePresence, motion } from 'motion/react'
-import { toFullPath, toTitleCase } from '../utils/imageUtils.js'
+import { toFullPath, toThumbPath, toTitleCase } from '../utils/imageUtils.js'
 
 // ─── Spinner animation ───────────────────────────────────────────────────────
 
@@ -16,7 +16,9 @@ const Overlay = styled.div`
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(240, 240, 245, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,17 +42,17 @@ const TopBar = styled.div`
 const Counter = styled.div`
   font-size: 0.75rem;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(0, 0, 0, 0.38);
   font-variant-numeric: tabular-nums;
 `
 
 const CloseButton = styled.button`
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   width: 34px;
   height: 34px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(0, 0, 0, 0.55);
   font-size: 0.85rem;
   cursor: pointer;
   display: flex;
@@ -59,9 +61,9 @@ const CloseButton = styled.button`
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(0, 0, 0, 0.12);
+    color: #000;
+    border-color: rgba(0, 0, 0, 0.2);
   }
 `
 
@@ -72,8 +74,8 @@ const ImageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  /* 56px top bar + ~70px bottom bar + breathing room */
-  max-height: calc(100vh - 140px);
+  /* 56px top bar + 100px dock area + 36px info row + breathing room */
+  max-height: calc(100vh - 220px);
 `
 
 const ImgContainer = styled.div`
@@ -81,12 +83,11 @@ const ImgContainer = styled.div`
   border-radius: 10px;
   overflow: hidden;
   box-shadow:
-    0 4px 10px rgba(0, 0, 0, 0.45),
-    0 18px 50px rgba(0, 0, 0, 0.55);
-  /* fixed minimum so Spinner is visible before image dimensions resolve */
+    0 4px 10px rgba(0, 0, 0, 0.12),
+    0 18px 50px rgba(0, 0, 0, 0.18);
   min-width: min(50vw, 400px);
   min-height: min(30vh, 220px);
-  max-width: min(92vw, 1400px);
+  max-width: min(88vw, 1200px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,8 +95,9 @@ const ImgContainer = styled.div`
 
 const Img = styled.img`
   display: block;
-  max-width: min(92vw, 1400px);
-  max-height: calc(100vh - 200px);
+  max-width: min(88vw, 1200px);
+  /* top bar 56px + info 36px + dock 100px + gaps */
+  max-height: calc(100vh - 220px);
   width: auto;
   height: auto;
   object-fit: contain;
@@ -116,8 +118,8 @@ const SpinnerWrap = styled.div`
     width: 26px;
     height: 26px;
     border-radius: 999px;
-    border: 2px solid rgba(255, 255, 255, 0.14);
-    border-top-color: rgba(255, 255, 255, 0.75);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-top-color: rgba(0, 0, 0, 0.5);
     animation: ${spin} 0.75s linear infinite;
   }
 `
@@ -135,7 +137,7 @@ const InfoRow = styled.div`
 `
 
 const InfoCaption = styled.div`
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(0, 0, 0, 0.78);
   font-family: var(--heading-font);
   font-size: 0.875rem;
   font-weight: 600;
@@ -148,67 +150,123 @@ const InfoCaption = styled.div`
 `
 
 const InfoMeta = styled.div`
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(0, 0, 0, 0.38);
   font-size: 0.75rem;
   letter-spacing: 0.05em;
   white-space: nowrap;
   flex-shrink: 0;
 `
 
-// ─── Bottom navigation & dots ────────────────────────────────────────────────
+// ─── Draggable thumbnail Dock ─────────────────────────────────────────────────
 
-const BottomBar = styled.div`
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 1002;
-`
+const PAGE_SIZE = 10  // max thumbs visible at once
 
-const NavButton = styled.button`
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.1s;
+function ThumbnailDock({ photos, currentIndex, onSelect }) {
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+  const [startIndex, setStartIndex] = useState(0)
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #fff;
-    transform: translateY(-1px);
+  const thumbSrc = (photo) => {
+    const src = photo.image || photo.url || ''
+    return toThumbPath(src) || src
   }
 
-  &:disabled {
-    opacity: 0.22;
-    cursor: default;
-    transform: none;
-  }
-`
+  const visiblePhotos = photos.slice(startIndex, startIndex + PAGE_SIZE)
+  const canLeft = startIndex > 0
+  const canRight = startIndex + PAGE_SIZE < photos.length
 
-const DotsBar = styled.div`
-  display: flex;
-  gap: 6px;
-  align-items: center;
-`
+  // keep selected in view
+  useEffect(() => {
+    if (currentIndex < startIndex) setStartIndex(currentIndex)
+    else if (currentIndex >= startIndex + PAGE_SIZE) setStartIndex(currentIndex - PAGE_SIZE + 1)
+  }, [currentIndex])
 
-const Dot = styled.div`
-  width: ${props => props.$active ? '18px' : '5px'};
-  height: 5px;
-  border-radius: 3px;
-  background: ${props => props.$active ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.22)'};
-  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s;
-`
+  const arrowBtn = (visible, onClick, label) => (
+    <div
+      onClick={e => { e.stopPropagation(); onClick() }}
+      style={{
+        width: 28, height: 28, borderRadius: '50%',
+        border: '1px solid rgba(0,0,0,0.1)',
+        background: 'rgba(255,255,255,0.8)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: visible ? 'pointer' : 'default',
+        fontSize: 14, color: 'rgba(0,0,0,0.55)',
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? 'auto' : 'none',
+        transition: 'opacity 0.2s',
+        userSelect: 'none', flexShrink: 0,
+      }}
+    >{label}</div>
+  )
+
+  return (
+    <div style={{ position: 'fixed', bottom: 20, left: 0, right: 0, zIndex: 1002, display: 'flex', justifyContent: 'center', pointerEvents: 'none' }}>
+      <motion.div
+        drag
+        dragMomentum={false}
+        dragElastic={0.08}
+        style={{ x: dragOffset.x, y: dragOffset.y, touchAction: 'none', pointerEvents: 'auto', cursor: 'grab' }}
+        onDragEnd={(_, info) => setDragOffset(prev => ({ x: prev.x + info.offset.x, y: prev.y + info.offset.y }))}
+      >
+        {/* pill — no overflow:hidden, thumbs float freely upward */}
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 6,
+          padding: '10px 10px 10px 10px',
+          borderRadius: 16,
+          background: 'rgba(255,255,255,0.55)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid rgba(0,0,0,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.1)',
+        }}>
+          {arrowBtn(canLeft, () => setStartIndex(i => Math.max(0, i - PAGE_SIZE)), '‹')}
+
+          {/* thumbs: negative margin stacking, exactly like the reference */}
+          <div style={{ display: 'flex', alignItems: 'center', marginLeft: -6 }}>
+            {visiblePhotos.map((photo, vi) => {
+              const i = startIndex + vi
+              const isActive = currentIndex === i
+              return (
+                <motion.div
+                  key={photo.id || i}
+                  onClick={e => { e.stopPropagation(); onSelect(i) }}
+                  style={{
+                    marginLeft: 6,
+                    flexShrink: 0,
+                    borderRadius: 10,
+                    overflow: 'hidden',
+                    width: 36, height: 36,
+                    cursor: 'pointer',
+                    zIndex: isActive ? 30 : PAGE_SIZE - vi,
+                    outline: isActive ? '2px solid rgba(0,0,0,0.45)' : '2px solid transparent',
+                    outlineOffset: 1,
+                    position: 'relative',
+                  }}
+                  initial={{ rotate: vi % 2 === 0 ? -12 : 12 }}
+                  animate={{
+                    scale: isActive ? 1.25 : 1,
+                    rotate: isActive ? 0 : vi % 2 === 0 ? -12 : 12,
+                    y: isActive ? -10 : 0,
+                  }}
+                  whileHover={{ scale: 1.3, rotate: 0, y: -12, transition: { type: 'spring', stiffness: 400, damping: 25 } }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+                >
+                  <img
+                    src={thumbSrc(photo)}
+                    alt={photo.caption || ''}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+                    draggable={false}
+                  />
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {arrowBtn(canRight, () => setStartIndex(i => Math.min(photos.length - PAGE_SIZE, i + PAGE_SIZE)), '›')}
+        </div>
+      </motion.div>
+    </div>
+  )
+}
 
 // ─── Motion variants ─────────────────────────────────────────────────────────
 
@@ -264,7 +322,7 @@ function LightboxImage({ photo }) {
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 
-export function Lightbox({ photos, currentIndex, onClose, onPrev, onNext }) {
+export function Lightbox({ photos, currentIndex, onClose, onPrev, onNext, onJump }) {
   // direction: -1 = going right (prev), +1 = going left (next), 0 = initial open
   const dirRef = useRef(0)
 
@@ -284,6 +342,11 @@ export function Lightbox({ photos, currentIndex, onClose, onPrev, onNext }) {
     onNext()
   }, [onNext])
 
+  const handleSelect = useCallback(i => {
+    dirRef.current = i > currentIndex ? 1 : -1
+    onJump(i)
+  }, [currentIndex, onJump])
+
   useEffect(() => {
     function onKey(e) {
       if (e.key === 'Escape') onClose()
@@ -301,8 +364,6 @@ export function Lightbox({ photos, currentIndex, onClose, onPrev, onNext }) {
   }, [])
 
   if (!photo) return null
-
-  const showDots = photos.length <= 11
 
   return (
     <Overlay onClick={handleOverlayClick}>
@@ -329,24 +390,12 @@ export function Lightbox({ photos, currentIndex, onClose, onPrev, onNext }) {
         </motion.div>
       </AnimatePresence>
 
-      {/* Bottom navigation */}
-      <BottomBar>
-        <NavButton onClick={handlePrev} disabled={currentIndex === 0} aria-label="Previous">
-          ‹
-        </NavButton>
-
-        {showDots && (
-          <DotsBar>
-            {photos.map((_, i) => (
-              <Dot key={i} $active={i === currentIndex} />
-            ))}
-          </DotsBar>
-        )}
-
-        <NavButton onClick={handleNext} disabled={currentIndex === photos.length - 1} aria-label="Next">
-          ›
-        </NavButton>
-      </BottomBar>
+      {/* Draggable thumbnail Dock */}
+      <ThumbnailDock
+        photos={photos}
+        currentIndex={currentIndex}
+        onSelect={handleSelect}
+      />
     </Overlay>
   )
 }
