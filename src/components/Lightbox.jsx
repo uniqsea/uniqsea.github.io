@@ -85,8 +85,6 @@ const ImgContainer = styled.div`
   box-shadow:
     0 4px 10px rgba(0, 0, 0, 0.12),
     0 18px 50px rgba(0, 0, 0, 0.18);
-  min-width: min(50vw, 400px);
-  min-height: min(30vh, 220px);
   max-width: min(88vw, 1200px);
   display: flex;
   align-items: center;
@@ -106,12 +104,13 @@ const Img = styled.img`
 `
 
 const SpinnerWrap = styled.div`
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  z-index: 1001;
 
   &::before {
     content: '';
