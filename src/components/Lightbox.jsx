@@ -296,7 +296,7 @@ function LightboxImage({ photo }) {
 
   return (
     <ImageWrapper>
-      <ImgContainer>
+      <ImgContainer style={{ boxShadow: imageLoaded ? undefined : 'none' }}>
         <Img
           src={currentSrc}
           alt={photo.caption || 'Photo'}
