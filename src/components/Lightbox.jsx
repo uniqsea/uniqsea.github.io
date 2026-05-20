@@ -158,11 +158,24 @@ const InfoMeta = styled.div`
 
 // ─── Draggable thumbnail Dock ─────────────────────────────────────────────────
 
-const PAGE_SIZE = 10  // max thumbs visible at once
+// 根据屏幕宽度动态决定一次展示多少缩略图
+function usePageSize() {
+  const [size, setSize] = useState(() => window.innerWidth < 480 ? 5 : window.innerWidth < 768 ? 7 : 10)
+  useEffect(() => {
+    function update() {
+      setSize(window.innerWidth < 480 ? 5 : window.innerWidth < 768 ? 7 : 10)
+    }
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+  return size
+}
 
 function ThumbnailDock({ photos, currentIndex, onSelect }) {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const [startIndex, setStartIndex] = useState(0)
+  const PAGE_SIZE = usePageSize()
+  const thumbSize = typeof window !== 'undefined' && window.innerWidth < 480 ? 28 : 36
 
   const thumbSrc = (photo) => {
     const src = photo.image || photo.url || ''
@@ -209,13 +222,15 @@ function ThumbnailDock({ photos, currentIndex, onSelect }) {
         {/* pill — no overflow:hidden, thumbs float freely upward */}
         <div style={{
           display: 'flex', alignItems: 'center', gap: 6,
-          padding: '10px 10px 10px 10px',
+          padding: '8px 10px',
           borderRadius: 16,
           background: 'rgba(255,255,255,0.55)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
           border: '1px solid rgba(0,0,0,0.08)',
           boxShadow: '0 4px 24px rgba(0,0,0,0.1)',
+          maxWidth: 'calc(100vw - 32px)',
+          overflow: 'hidden',
         }}>
           {arrowBtn(canLeft, () => setStartIndex(i => Math.max(0, i - PAGE_SIZE)), '‹')}
 
@@ -231,9 +246,9 @@ function ThumbnailDock({ photos, currentIndex, onSelect }) {
                   style={{
                     marginLeft: 6,
                     flexShrink: 0,
-                    borderRadius: 10,
+                    borderRadius: 8,
                     overflow: 'hidden',
-                    width: 36, height: 36,
+                    width: thumbSize, height: thumbSize,
                     cursor: 'pointer',
                     zIndex: isActive ? 30 : PAGE_SIZE - vi,
                     outline: isActive ? '2px solid rgba(0,0,0,0.45)' : '2px solid transparent',
