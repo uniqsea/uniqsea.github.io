@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Local AI/tooling state
+.agents/
+.claude/
+.codex/
+.impeccable/
+PRODUCT.md
+DESIGN.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
