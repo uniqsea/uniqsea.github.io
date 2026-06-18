@@ -136,7 +136,7 @@ const ContentSection = styled.section`
   code {
     padding: 3px 8px;
     background: var(--bg-alt);
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 0.9em;
     font-family: 'Monaco', 'Menlo', monospace;
     border: 1px solid var(--border);

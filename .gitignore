@@ -17,6 +17,8 @@ dist-ssr
 .claude/
 .codex/
 .impeccable/
+.superpowers/
+.playwright-mcp/
 PRODUCT.md
 DESIGN.md
 

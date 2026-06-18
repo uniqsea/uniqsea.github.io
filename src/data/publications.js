@@ -14,9 +14,9 @@ export const publications = [
     award: '',
     tags: ['Poster', 'HCI'],
     links: [
+      { label: 'PDF', href: '/publication/3772363.3798371.pdf', tone: 'accent' },
       { label: 'DOI', href: 'https://dl.acm.org/doi/10.1145/3772363.3798371', tone: 'info' },
-      { label: 'PDF', href: '/publication/3772363.3798371.pdf', tone: 'danger' },
-      // { label: 'BibTeX', href: '#', tone: 'success' },
+      // { label: 'BibTeX', href: '#' },
     ],
   },
   {
@@ -29,9 +29,9 @@ export const publications = [
     award: '',
     tags: ['Demo', 'HCI'],
     links: [
+      { label: 'PDF', href: '/publication/3706599.3721178.pdf', tone: 'accent' },
       { label: 'DOI', href: 'https://doi.org/10.1145/3706599.3721178', tone: 'info' },
-      { label: 'PDF', href: '/publication/3706599.3721178.pdf', tone: 'danger' },
-      // { label: 'BibTeX', href: '#', tone: 'success' },
+      // { label: 'BibTeX', href: '#' },
     ],
   },
 ]

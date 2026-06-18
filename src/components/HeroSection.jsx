@@ -65,7 +65,7 @@ const SocialRow = styled.div`
   margin-top: 22px; display: flex; gap: 10px;
   a { 
     display: inline-flex; align-items: center; justify-content: center; 
-    width: 36px; height: 36px; border-radius: 10px; 
+    width: 36px; height: 36px; border-radius: 8px; 
     border: 1px solid var(--border); color: var(--fg); text-decoration: none; 
     transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; 
     will-change: transform; 
@@ -190,28 +190,6 @@ export function HeroSection({ maxWidth: Max }) {
           </Tilt>
         </Grid>
       </Max>
-      {/* subtle animated ocean-like circles (example-inspired) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 0.25, scale: [1, 1.08, 1] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        style={{
-          position: 'absolute', right: '8%', top: '18%', width: 120, height: 120,
-          borderRadius: 24, background: 'linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.06))',
-          filter: 'blur(0.2px)'
-        }}
-        aria-hidden
-      />
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 0.18, scale: [1, 1.12, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        style={{
-          position: 'absolute', left: '6%', bottom: '12%', width: 90, height: 90,
-          borderRadius: 999, background: 'linear-gradient(135deg, rgba(239,68,68,0.1), rgba(0,0,0,0.02))'
-        }}
-        aria-hidden
-      />
     </Hero>
   )
 }

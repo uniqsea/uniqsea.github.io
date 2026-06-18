@@ -80,7 +80,7 @@ const ImageWrapper = styled.div`
 
 const ImgContainer = styled.div`
   position: relative;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow:
     0 4px 10px rgba(0, 0, 0, 0.12),
@@ -223,7 +223,7 @@ function ThumbnailDock({ photos, currentIndex, onSelect }) {
         <div style={{
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '8px 10px',
-          borderRadius: 16,
+          borderRadius: 18,
           background: 'rgba(255,255,255,0.55)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',

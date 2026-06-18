@@ -15,12 +15,12 @@ const Base = styled.span`
 `
 
 const palette = {
-  neutral: { color: '#111', bg: '#e5e7eb' },
-  info: { color: '#fff', bg: '#3b82f6' },
-  danger: { color: '#fff', bg: '#ef4444' },
-  success: { color: '#fff', bg: '#22c55e' },
-  amber: { color: '#111', bg: '#fde68a' },
-  gold: { color: '#111', bg: '#fbbf24' },
+  neutral: { color: 'var(--fg)',  bg: 'var(--surface-alt)' },
+  accent:  { color: '#fff',       bg: 'var(--accent)' },       // PDF
+  info:    { color: '#fff',       bg: '#2563eb' },              // DOI
+  success: { color: '#fff',       bg: '#16a34a' },              // BibTeX
+  amber:   { color: '#111',       bg: '#fde68a' },              // Web / arXiv / Demo
+  dark:    { color: '#fff',       bg: '#111111' },              // GitHub / Code
 }
 
 export function Badge({ as: asProp, tone = 'neutral', variant = 'soft', href, children, style, ...props }) {
@@ -36,7 +36,7 @@ export function Badge({ as: asProp, tone = 'neutral', variant = 'soft', href, ch
   )
 }
 
-export function Dot({ color = '#f59e0b', size = 10, ...props }) {
+export function Dot({ color = 'var(--muted)', size = 10, ...props }) {
   return (
     <span
       {...props}
