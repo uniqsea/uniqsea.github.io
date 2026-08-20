@@ -118,7 +118,7 @@ export function PublicationCard({ pub }) {
               <img src={thumb} alt={pub.title} />
               {pub.coverTitle ? <CoverTitle $color={pub.coverTextColor}>{pub.coverTitle}</CoverTitle> : null}
             </>
-          : <CoverPlaceholder title={pub.title} />}
+          : <CoverPlaceholder title={pub.title} coverId={pub.coverId} />}
       </Thumb>
       <Content>
         {pub.award && (

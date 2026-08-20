@@ -1,6 +1,6 @@
 import bioralCover from '../assets/publication/bioral-demo-cover.png'
 import magheartCover from '../assets/publication/magheart-cover.png'
-import teethMarkCover from '../assets/publication/teethmark-cover-v3-yellow.png'
+import teethMarkCover from '../assets/publication/teethmark-cover-v6-cobalt.webp'
 import echoMindCover from '../assets/publication/echomind-cover-v2-teal.png'
 
 export const publicationsHeaderNoteHtml = '<sup>*</sup> Equal Contribution'
@@ -38,6 +38,7 @@ export const publications = [
     authorsHtml: 'Yijing Jiang, <strong><u>Haiyang Xu</u></strong>, Yunhui Song, Black Sun, Junzhe Jin, and Michael Wessely.',
     venueHtml: '<em>UIST 2026 Poster</em>',
     year: '2026',
+    coverId: 'clouds',
     award: '',
     tags: ['Poster', 'HCI'],
     links: [],
