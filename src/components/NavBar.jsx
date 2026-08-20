@@ -38,8 +38,8 @@ const Brand = styled(Link)`
 const LogoMark = styled.span`
   width: 28px; height: 28px; border-radius: 8px;
   display: inline-flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, rgba(239,68,68,0.9), rgba(239,68,68,0.6));
-  color: #fff; font-weight: 700; font-size: 12px; letter-spacing: 0.5px;
+  background: var(--accent);
+  color: var(--accent-contrast); font-weight: 700; font-size: 12px; letter-spacing: 0.5px;
 `
 
 const BrandText = styled.span`

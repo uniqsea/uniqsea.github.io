@@ -8,7 +8,9 @@ export const GlobalStyle = createGlobalStyle`
     --surface-hover: #f6f6f6;
     --fg: #111111;
     --muted: #6b7280;
-    --accent: #ef4444; /* minimal accent: soft red */
+    --accent: #252525; /* graphite signature accent */
+    --accent-contrast: #ffffff;
+    --signal-red: #ef4444;
     --border: rgba(17, 17, 17, 0.12);
     --shadow: transparent; /* minimal: no drop shadows */
     --shadow-lg: none;
@@ -25,7 +27,9 @@ export const GlobalStyle = createGlobalStyle`
       --surface-hover: #14161b;
       --fg: #f3f4f6;
       --muted: #9aa3af;
-      --accent: #f87171; /* dark accent */
+      --accent: #dad6cc; /* dark graphite signature accent */
+      --accent-contrast: #111111;
+      --signal-red: #f87171;
       --border: rgba(243, 244, 246, 0.16);
       --shadow: transparent;
       --shadow-lg: none;
@@ -112,7 +116,7 @@ export const GlobalStyle = createGlobalStyle`
     top: -60px; 
     padding: 12px 16px; 
     background: var(--accent); 
-    color: #fff; 
+    color: var(--accent-contrast); 
     border-radius: 8px; 
     z-index: 1000; 
     text-decoration: none; 

@@ -230,7 +230,7 @@ function ThumbnailDock({ photos, currentIndex, onSelect }) {
           border: '1px solid rgba(0,0,0,0.08)',
           boxShadow: '0 4px 24px rgba(0,0,0,0.1)',
           maxWidth: 'calc(100vw - 32px)',
-          overflow: 'hidden',
+          overflow: 'visible',
         }}>
           {arrowBtn(canLeft, () => setStartIndex(i => Math.max(0, i - PAGE_SIZE)), '‹')}
 
@@ -251,8 +251,6 @@ function ThumbnailDock({ photos, currentIndex, onSelect }) {
                     width: thumbSize, height: thumbSize,
                     cursor: 'pointer',
                     zIndex: isActive ? 30 : PAGE_SIZE - vi,
-                    outline: isActive ? '2px solid rgba(0,0,0,0.45)' : '2px solid transparent',
-                    outlineOffset: 1,
                     position: 'relative',
                   }}
                   initial={{ rotate: vi % 2 === 0 ? -12 : 12 }}

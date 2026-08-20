@@ -84,7 +84,7 @@ export function PublicationCard({ pub }) {
         {links.length > 0 && (
           <Badges>
             {links.map(l => (
-              <Badge key={l.label} as="a" href={l.href} tone={l.tone} variant={l.variant} target="_blank" rel="noreferrer">
+              <Badge key={l.label} as="a" href={l.href} tone={l.tone} variant={l.variant} equalWidth target="_blank" rel="noreferrer">
                 {l.label}
               </Badge>
             ))}

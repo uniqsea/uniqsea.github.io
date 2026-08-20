@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { NavBar } from '../components/NavBar.jsx'
 import { Lightbox } from '../components/Lightbox.jsx'
 import { Page, Max } from '../components/Layout.jsx'
@@ -85,12 +86,59 @@ const CardSub = styled.span`
   color: var(--muted);
 `
 
+const InteractiveCard = styled(Card)`
+  text-decoration: none;
+`
+
+const Preview = styled.div`
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #087cff;
+  border: 1px solid var(--border);
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg { width: 100%; height: 100%; color: #fff; }
+  .pv-dot { transition: opacity 0.3s ease; }
+  ${Card}:hover & svg { transform: scale(1.02); transition: transform 0.4s ease; }
+`
+
+const PreviewTag = styled.span`
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+`
+
+// A tiny static atlas crop hinting at the live piece, no data needed.
+const previewDots = Array.from({ length: 260 }, (_, i) => {
+  const a = i * 2.39996
+  const rr = Math.sqrt((i + 0.5) / 260)
+  const island = i > 185
+  return {
+    x: (island ? 72 + Math.cos(a) * rr * 11 : 33 + Math.cos(a) * rr * 26).toFixed(1),
+    y: (island ? 45 + Math.sin(a) * rr * 15 : 43 + Math.sin(a) * rr * 30).toFixed(1),
+  }
+})
+
 const lightboxPhotos = designs.map(d => ({
   image: d.full,
   clickOriginal: true,
   caption: d.title,
   location: d.subtitle,
 }))
+
+const showVisitorGlobe = false
 
 export default function Design() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
@@ -106,6 +154,33 @@ export default function Design() {
             <Rule />
           </Header>
           <Grid>
+            {showVisitorGlobe && (
+              <InteractiveCard as={Link} to="/design/visitor-globe">
+                <Preview>
+                  <PreviewTag>Interactive</PreviewTag>
+                  <svg viewBox="0 0 100 75" aria-hidden="true">
+                    <line x1="34" y1="0" x2="34" y2="75" stroke="rgba(255,255,255,.22)" strokeWidth=".45" />
+                    <line x1="67" y1="0" x2="67" y2="75" stroke="rgba(255,255,255,.22)" strokeWidth=".45" />
+                    <line x1="0" y1="38" x2="100" y2="38" stroke="rgba(255,255,255,.22)" strokeWidth=".45" />
+                    {previewDots.map((d, i) => (
+                      <circle
+                        key={i}
+                        className="pv-dot"
+                        cx={d.x}
+                        cy={d.y}
+                        r="0.62"
+                        fill="currentColor"
+                        opacity="0.92"
+                      />
+                    ))}
+                  </svg>
+                </Preview>
+                <CardMeta>
+                  <CardTitle>unique</CardTitle>
+                  <CardSub>Live · your country in dots</CardSub>
+                </CardMeta>
+              </InteractiveCard>
+            )}
             {designs.map((item, i) => (
               <Card key={item.id} onClick={() => setLightboxIndex(i)}>
                 <ImageWrap>
