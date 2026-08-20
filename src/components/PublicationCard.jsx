@@ -1,29 +1,57 @@
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
-import { Badge, Dot } from './Badge.jsx'
+import { CoverPlaceholder } from './CoverPlaceholder.jsx'
 
 const Row = styled.li`
   display: grid;
-  grid-template-columns: 1fr 2fr; /* cover takes 1/3 width, content 2/3 */
+  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 2.2fr);
   gap: 28px;
-  align-items: start;
-  @media (max-width: 700px) { grid-template-columns: 1fr; }
+  align-items: center;
+
+  & + & {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
 `
 
 const Thumb = styled.div`
   width: 100%;
-  height: 180px; /* match project cover height */
-  border-radius: 0; /* keep square corners as requested */
+  aspect-ratio: 16 / 10;
+  position: relative;
+  border-radius: 0;
   overflow: hidden;
   background: var(--bg-alt);
   img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  @media (max-width: 1024px) { height: 160px; }
-  @media (max-width: 700px) { height: 140px; }
+`
+
+const CoverTitle = styled.span`
+  position: absolute;
+  left: clamp(18px, 2.2vw, 26px);
+  bottom: clamp(18px, 2.2vw, 24px);
+  max-width: calc(100% - 44px);
+  color: ${({ $color }) => $color || '#26382d'};
+  font-family: var(--heading-font);
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
 `
 
 const Content = styled.div`
   display: grid;
   gap: 6px;
+  width: calc(100% - clamp(24px, 4vw, 56px));
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `
 
 const TopLine = styled.div`
@@ -33,6 +61,7 @@ const TopLine = styled.div`
 const Title = styled.h3`
   margin: 0; font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--fg);
   font-weight: 700;
+  line-height: 1.2;
 `
 
 const Authors = styled.div`
@@ -40,11 +69,35 @@ const Authors = styled.div`
 `
 
 const Meta = styled.div`
-  color: var(--muted); font-size: 0.95rem;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 600;
 `
 
 const Badges = styled.div`
-  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
+`
+
+const PublicationLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 1px solid var(--fg);
+  border-radius: 5px;
+  color: var(--fg);
+  font-family: var(--heading-font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.18s ease-out, color 0.18s ease-out;
+
+  &:hover {
+    background: var(--fg);
+    color: var(--bg);
+    text-decoration: none;
+  }
 `
 
 const Award = styled.div`
@@ -53,13 +106,20 @@ const Award = styled.div`
 `
 
 export function PublicationCard({ pub }) {
-  const thumb = pub.thumb || '/sea.png'
+  const thumb = pub.thumb
   const links = Array.isArray(pub.links) ? pub.links : []
   const authorsText = pub.authors || ''
 
   return (
     <Row>
-      <Thumb>{thumb ? <img src={thumb} alt={pub.title} /> : null}</Thumb>
+      <Thumb>
+        {thumb
+          ? <>
+              <img src={thumb} alt={pub.title} />
+              {pub.coverTitle ? <CoverTitle $color={pub.coverTextColor}>{pub.coverTitle}</CoverTitle> : null}
+            </>
+          : <CoverPlaceholder title={pub.title} />}
+      </Thumb>
       <Content>
         {pub.award && (
           <Award>🏆 {pub.award}</Award>
@@ -84,9 +144,9 @@ export function PublicationCard({ pub }) {
         {links.length > 0 && (
           <Badges>
             {links.map(l => (
-              <Badge key={l.label} as="a" href={l.href} tone={l.tone} variant={l.variant} equalWidth target="_blank" rel="noreferrer">
+              <PublicationLink key={l.label} href={l.href} target="_blank" rel="noreferrer">
                 {l.label}
-              </Badge>
+              </PublicationLink>
             ))}
           </Badges>
         )}

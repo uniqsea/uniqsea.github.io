@@ -17,11 +17,11 @@ const NavInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
+  padding: 12px 32px;
   max-width: 1200px;
   margin: 0 auto;
   @media (max-width: 640px) { 
-    padding: 8px 16px; 
+    padding: 8px 20px;
     gap: 8px;
   }
 `

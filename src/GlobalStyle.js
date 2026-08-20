@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     --surface: #f8f8f8;
     --surface-hover: #f6f6f6;
     --fg: #111111;
-    --muted: #6b7280;
+    --muted: #5f6672;
     --accent: #252525; /* graphite signature accent */
     --accent-contrast: #ffffff;
     --signal-red: #ef4444;
@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
       --surface: #0f1115;
       --surface-hover: #14161b;
       --fg: #f3f4f6;
-      --muted: #9aa3af;
+      --muted: #a6adb8;
       --accent: #dad6cc; /* dark graphite signature accent */
       --accent-contrast: #111111;
       --signal-red: #f87171;

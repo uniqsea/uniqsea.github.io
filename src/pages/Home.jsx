@@ -28,9 +28,8 @@ export default function Home() {
 import { site } from '../data.js'
 const domainNote = site.domainNote
 const Footer = styled.footer`
-  padding: 48px 0 64px; 
+  padding: 32px 0 48px;
   text-align: center; 
   font-size: 14px; 
   color: var(--muted);
-  border-top: 1px solid var(--border);
 `

@@ -2,17 +2,18 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { getProjectPath } from '../utils/slug.js'
 import { Badge } from './Badge.jsx'
+import { CoverPlaceholder } from './CoverPlaceholder.jsx'
 
 const Wrap = styled.article`
   display: grid;
-  gap: 16px;
+  gap: 14px;
   height: 100%;
 `
 
 const Cover = styled.div`
   width: 100%;
   aspect-ratio: 16 / 10; /* keep consistent 16:10 cover */
-  border-radius: 18px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--bg-alt);
   position: relative;
@@ -22,11 +23,11 @@ const Cover = styled.div`
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
+    transition: opacity 0.25s ease-out;
   }
 
   &:hover img {
-    transform: scale(1.03);
+    opacity: 0.92;
   }
 `
 
@@ -41,7 +42,7 @@ const Title = styled.h3`
   margin: 0;
   font-size: clamp(1.1rem, 2vw, 1.4rem);
   color: var(--fg);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
   word-break: break-word;
   min-width: 0;
@@ -50,13 +51,13 @@ const Title = styled.h3`
 const Desc = styled.p`
   margin: 0;
   color: var(--muted);
-  line-height: 1.8;
+  line-height: 1.65;
   font-size: 1rem;
   max-width: 60ch;
 `
 
 const Meta = styled.div`
-  margin-top: 8px;
+  margin-top: 6px;
   color: var(--muted);
   font-weight: 600;
   font-size: 0.95rem;
@@ -81,7 +82,7 @@ function getClickConfig(project) {
 }
 
 export function ProjectCard({ project }) {
-  const cover = project.thumb || project.cover || '/sea.png'
+  const cover = project.thumb || project.cover
   const label = project.label || (project.status ? project.status : null)
   const { type, to, href } = getClickConfig(project)
 
@@ -110,7 +111,11 @@ export function ProjectCard({ project }) {
   return (
     <Wrap>
       <WrapperComponent>
-        <Cover>{cover && <img src={cover} alt={project.title} />}</Cover>
+        <Cover>
+          {cover
+            ? <img src={cover} alt={project.title} />
+            : <CoverPlaceholder title={project.title} />}
+        </Cover>
       </WrapperComponent>
       <div>
         <TitleRow>
