@@ -6,16 +6,16 @@ import { Lightbox } from './Lightbox.jsx'
 
 const MasonryGrid = styled(Masonry)`
   display: flex;
-  margin-left: -16px; /* 抵消列间距 */
+  margin-left: -20px; /* 抵消列间距 */
   width: auto;
   
   /* 列样式 */
   .masonry-column {
-    padding-left: 16px; /* 列间距 */
+    padding-left: 20px; /* 列间距 */
     background-clip: padding-box;
     
     > * {
-      margin-bottom: 16px; /* 图片之间的垂直间距 */
+      margin-bottom: 20px; /* 图片之间的垂直间距 */
     }
   }
 `
@@ -98,4 +98,3 @@ export function MasonryGallery({ photos }) {
     </>
   )
 }
-

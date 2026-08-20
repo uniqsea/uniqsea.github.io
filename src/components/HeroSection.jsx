@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'motion/react'
 import Tilt from 'react-parallax-tilt'
-import { Link } from 'react-router-dom'
 import { site, socials } from '../data.js'
 import { Icon } from './Icon.jsx'
 import haiyangPhoto from '../assets/haiyang.png'
@@ -13,6 +12,10 @@ const Hero = styled.header`
   align-items: center;
   padding: 80px 0 64px;
   position: relative;
+
+  @media (max-width: 640px) {
+    padding: 56px 0 48px;
+  }
 `
 
 const Lead = styled.div`
@@ -62,21 +65,27 @@ const Description = styled.p`
 // removed CTA and topic tags per request
 
 const SocialRow = styled.div`
-  margin-top: 22px; display: flex; gap: 10px;
-  a { 
-    display: inline-flex; align-items: center; justify-content: center; 
-    width: 36px; height: 36px; border-radius: 8px; 
-    border: 1px solid var(--border); color: var(--fg); text-decoration: none; 
-    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; 
-    will-change: transform; 
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--fg);
+    text-decoration: none;
+    opacity: 0.78;
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  a:hover { 
-    transform: translateY(-2px) scale(1.05); 
-    border-color: var(--fg);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  a:hover {
+    text-decoration: none;
+    opacity: 1;
+    transform: translateY(-1px);
   }
-  a:active { transform: translateY(0) scale(0.97); }
-  img { filter: invert(0); }
 `
 
 const FlipContainer = styled.div`
@@ -162,7 +171,7 @@ export function HeroSection({ maxWidth: Max }) {
                 const s = socials.find(x => x.icon === name)
                 return s ? (
                   <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label}>
-                    <Icon name={name} size={16} />
+                    <Icon name={name} size={17} />
                   </a>
                 ) : null
               })}

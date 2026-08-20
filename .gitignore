@@ -19,6 +19,7 @@ dist-ssr
 .impeccable/
 .superpowers/
 .playwright-mcp/
+.playwright-cli/
 PRODUCT.md
 DESIGN.md
 

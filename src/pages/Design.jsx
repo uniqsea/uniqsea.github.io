@@ -7,65 +7,64 @@ import { Page, Max } from '../components/Layout.jsx'
 import { designs } from '../data/designs.js'
 
 const Section = styled.section`
-  padding: 80px 0;
+  padding: clamp(64px, 9vw, 112px) 0 96px;
   min-height: calc(100vh - 72px);
   @media (max-width: 640px) { padding: 60px 0; }
 `
 
 const Header = styled.header`
-  margin-bottom: 60px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  margin-bottom: clamp(48px, 7vw, 80px);
+  max-width: 560px;
   @media (max-width: 640px) { margin-bottom: 40px; }
 `
 
-const Rule = styled.div`
-  width: 36px; height: 1px;
-  background: var(--border);
+const Title = styled.h1`
+  margin-bottom: 12px;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 600;
 `
 
 const Subtitle = styled.p`
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: var(--muted);
-  letter-spacing: 0.02em;
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.7;
 `
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 36px;
+  column-gap: 20px;
+  row-gap: 40px;
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
   }
 `
 
-const Card = styled.div`
+const Card = styled.button`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
 `
 
 const ImageWrap = styled.div`
-  border-radius: 12px;
   overflow: hidden;
   background: var(--surface);
-  border: 1px solid var(--border);
   img {
     width: 100%;
     display: block;
     object-fit: contain;
-    transition: transform 0.4s ease;
   }
-  ${Card}:hover & img { transform: scale(1.02); }
 `
 
 const CardMeta = styled.div`
@@ -92,10 +91,8 @@ const InteractiveCard = styled(Card)`
 
 const Preview = styled.div`
   position: relative;
-  border-radius: 12px;
   overflow: hidden;
   background: #087cff;
-  border: 1px solid var(--border);
   aspect-ratio: 4 / 3;
   display: flex;
   align-items: center;
@@ -149,9 +146,8 @@ export default function Design() {
       <Section>
         <Max>
           <Header>
-            <Rule />
+            <Title>Design</Title>
             <Subtitle>Design work and visual artifacts.</Subtitle>
-            <Rule />
           </Header>
           <Grid>
             {showVisitorGlobe && (
@@ -182,7 +178,12 @@ export default function Design() {
               </InteractiveCard>
             )}
             {designs.map((item, i) => (
-              <Card key={item.id} onClick={() => setLightboxIndex(i)}>
+              <Card
+                key={item.id}
+                type="button"
+                onClick={() => setLightboxIndex(i)}
+                aria-label={`Open ${item.title}`}
+              >
                 <ImageWrap>
                   <img src={item.image} alt={item.title} />
                 </ImageWrap>

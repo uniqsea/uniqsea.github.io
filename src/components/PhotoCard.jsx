@@ -1,18 +1,19 @@
 import styled from 'styled-components'
 import { useState } from 'react'
-import { toThumbPath, toTitleCase } from '../utils/imageUtils.js'
+import { toThumbPath } from '../utils/imageUtils.js'
 
-const Card = styled.div`
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--surface);
+const Card = styled.button`
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-  }
 `
 
 const Image = styled.img`
@@ -22,27 +23,7 @@ const Image = styled.img`
   object-fit: cover;
 `
 
-const CaptionOverlay = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 28px 14px 14px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.62), transparent);
-  color: rgba(255, 255, 255, 0.92);
-  font-family: var(--heading-font);
-  font-size: 0.82rem;
-  font-weight: 600;
-  pointer-events: none;
-  opacity: ${props => props.$visible ? 1 : 0};
-  transition: opacity 0.25s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
-
 export function PhotoCard({ photo, onCardClick }) {
-  const [hovered, setHovered] = useState(false)
   const caption = photo.caption
 
   const imageSrc = photo.image || photo.url || ''
@@ -57,9 +38,9 @@ export function PhotoCard({ photo, onCardClick }) {
   
   return (
     <Card
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      type="button"
       onClick={onCardClick}
+      aria-label={caption ? `Open ${caption}` : 'Open photo'}
     >
       <Image
         src={currentSrc}
@@ -67,9 +48,6 @@ export function PhotoCard({ photo, onCardClick }) {
         loading="lazy"
         onError={handleImageError}
       />
-      {caption && (
-        <CaptionOverlay $visible={hovered}>{toTitleCase(caption)}</CaptionOverlay>
-      )}
     </Card>
   )
 }

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { motion } from 'motion/react'
 import { site } from '../data.js'
 import { Link, NavLink as RouterNavLink } from 'react-router-dom'
 
@@ -54,14 +53,15 @@ const BrandText = styled.span`
 `
 
 const Pills = styled.ul`
-  display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 2px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   
   @media (max-width: 640px) {
-    gap: 2px;
-    padding: 1px;
+    gap: 16px;
   }
 `
 
@@ -70,20 +70,28 @@ const NavItem = styled.li`
   a {
     position: relative;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 8px 0;
     font-family: var(--heading-font);
-    font-size: clamp(12px, 3vw, 15px); 
-    font-weight: 600;
+    font-size: clamp(12px, 3vw, 14px);
+    font-weight: 500;
     color: var(--muted);
     text-decoration: none;
-    border-radius: 999px;
     transition: color 0.2s ease;
-    
-    @media (max-width: 640px) {
-      padding: 6px 10px;
-    }
   }
-  a:hover { color: var(--fg); }
+  a:hover,
+  a[aria-current='page'] {
+    color: var(--fg);
+    text-decoration: none;
+  }
+  a[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+    height: 1px;
+    background: currentColor;
+  }
 `
 
 const navItems = [
@@ -106,25 +114,7 @@ export function NavBar() {
         <Pills>
           {navItems.map(item => (
             <NavItem key={item.to}>
-              <RouterNavLink to={item.to} end>
-                {({ isActive }) => (
-                  <>
-                    {isActive && (
-                      <motion.span
-                        layoutId="activePill"
-                        style={{
-                          position: 'absolute', inset: 0, borderRadius: 999,
-                          background: 'var(--fg)',
-                        }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 30, duration: 0.3 }}
-                      />
-                    )}
-                    <span style={{ position: 'relative', zIndex: 1, color: isActive ? 'var(--bg)' : 'inherit' }}>
-                      {item.label}
-                    </span>
-                  </>
-                )}
-              </RouterNavLink>
+              <RouterNavLink to={item.to} end>{item.label}</RouterNavLink>
             </NavItem>
           ))}
         </Pills>
