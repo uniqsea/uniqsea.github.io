@@ -6,7 +6,7 @@ import magPosterFull from '../assets/designs/mag-poster.png'
 export const designs = [
   {
     id: 'magheart-poster',
-    title: 'MagHeart',
+    title: 'MagHeart Poster',
     subtitle: 'CHI EA \'26',
     image: magPosterThumb,
     full: magPosterFull,

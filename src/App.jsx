@@ -6,6 +6,7 @@ import Publications from './pages/Publications.jsx'
 import ProjectPage from './pages/ProjectPage.jsx'
 import Moments from './pages/Moments.jsx'
 import Design from './pages/Design.jsx'
+import DesignDetail from './pages/DesignDetail.jsx'
 
 // Heavy three.js page — code-split so the rest of the site never loads it.
 const VisitorGlobePage = lazy(() => import('./pages/VisitorGlobePage.jsx'))
@@ -19,6 +20,7 @@ export default function App(){
       <Route path="/publications" element={<Publications />} />
       <Route path="/moments" element={<Moments />} />
       <Route path="/design" element={<Design />} />
+      <Route path="/design/:designId" element={<DesignDetail />} />
       <Route
         path="/design/visitor-globe"
         element={

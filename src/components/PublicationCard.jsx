@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
+import { Link } from 'react-router-dom'
 import { CoverPlaceholder } from './CoverPlaceholder.jsx'
 
 const Row = styled.li`
@@ -144,7 +145,13 @@ export function PublicationCard({ pub }) {
         {links.length > 0 && (
           <Badges>
             {links.map(l => (
-              <PublicationLink key={l.label} href={l.href} target="_blank" rel="noreferrer">
+              <PublicationLink
+                key={l.label}
+                as={l.internal ? Link : 'a'}
+                {...(l.internal
+                  ? { to: l.href }
+                  : { href: l.href, target: '_blank', rel: 'noreferrer' })}
+              >
                 {l.label}
               </PublicationLink>
             ))}

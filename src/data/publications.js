@@ -55,6 +55,7 @@ export const publications = [
     links: [
       { label: 'DOI', href: 'https://dl.acm.org/doi/10.1145/3772363.3798371', tone: 'info' },
       { label: 'PDF', href: '/publication/3772363.3798371.pdf', tone: 'pdf' },
+      { label: 'Poster', href: '/design/magheart-poster', internal: true },
       // { label: 'BibTeX', href: '#' },
     ],
   },

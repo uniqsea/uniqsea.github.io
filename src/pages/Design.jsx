@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { NavBar } from '../components/NavBar.jsx'
-import { Lightbox } from '../components/Lightbox.jsx'
 import { Page, Max } from '../components/Layout.jsx'
 import { designs } from '../data/designs.js'
 
@@ -54,7 +52,10 @@ const Card = styled.button`
   color: inherit;
   font: inherit;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
+
+  &:hover { text-decoration: none; }
 `
 
 const ImageWrap = styled.div`
@@ -128,18 +129,9 @@ const previewDots = Array.from({ length: 260 }, (_, i) => {
   }
 })
 
-const lightboxPhotos = designs.map(d => ({
-  image: d.full,
-  clickOriginal: true,
-  caption: d.title,
-  location: d.subtitle,
-}))
-
 const showVisitorGlobe = false
 
 export default function Design() {
-  const [lightboxIndex, setLightboxIndex] = useState(null)
-
   return (
     <Page>
       <NavBar />
@@ -177,11 +169,11 @@ export default function Design() {
                 </CardMeta>
               </InteractiveCard>
             )}
-            {designs.map((item, i) => (
+            {designs.map(item => (
               <Card
+                as={Link}
                 key={item.id}
-                type="button"
-                onClick={() => setLightboxIndex(i)}
+                to={`/design/${item.id}`}
                 aria-label={`Open ${item.title}`}
               >
                 <ImageWrap>
@@ -196,16 +188,6 @@ export default function Design() {
           </Grid>
         </Max>
       </Section>
-
-      {lightboxIndex !== null && (
-        <Lightbox
-          photos={lightboxPhotos}
-          currentIndex={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-          onPrev={() => setLightboxIndex(i => Math.max(0, i - 1))}
-          onNext={() => setLightboxIndex(i => Math.min(lightboxPhotos.length - 1, i + 1))}
-        />
-      )}
     </Page>
   )
 }
