@@ -10,51 +10,56 @@ import seaPhoto from '../assets/sea.png'
 const Hero = styled.header`
   display: flex;
   align-items: center;
-  padding: 80px 0 64px;
+  padding: 72px 0 56px;
   position: relative;
 
   @media (max-width: 640px) {
-    padding: 56px 0 48px;
+    padding: 52px 0 44px;
   }
 `
 
 const Lead = styled.div`
-  max-width: 900px;
+  max-width: 720px;
 `
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 64px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
+  gap: clamp(40px, 6vw, 72px);
   align-items: center;
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 36px;
   }
 `
 
 const Title = styled.h1`
   font-family: var(--heading-font);
-  font-size: clamp(1.6rem, 8vw, 5rem);
-  line-height: 1.15; /* avoid glyph clipping */
+  font-size: clamp(2.75rem, 6vw, 4.25rem);
+  line-height: 1.08; /* avoid glyph clipping */
   letter-spacing: -0.02em;
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   color: var(--fg);
   font-weight: 700;
   white-space: nowrap; /* single line */
   display: block;
   padding-block: 0.08em; /* extra breathing room for ascenders/descenders */
-  min-height: 1.15em; /* 防止文字变化时高度跳动 */
+  min-height: 1.08em; /* 防止文字变化时高度跳动 */
+
+  @media (max-width: 640px) {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+    white-space: normal;
+  }
 `
 
 // no subtitle per user request
 
 const Description = styled.p`
-  max-width: 640px;
+  max-width: 600px;
   color: var(--muted);
-  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
-  line-height: 1.75;
-  margin: 0 0 18px;
+  font-size: 1rem;
+  line-height: 1.72;
+  margin: 0;
   text-align: left;
   
   @media (max-width: 640px) {
@@ -65,7 +70,7 @@ const Description = styled.p`
 // removed CTA and topic tags per request
 
 const SocialRow = styled.div`
-  margin-top: 24px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px 22px;
@@ -89,11 +94,11 @@ const SocialRow = styled.div`
 `
 
 const FlipContainer = styled.div`
-  width: 300px; height: 300px;
+  width: 260px; height: 260px;
   perspective: 800px;
   cursor: pointer;
   justify-self: center;
-  @media (max-width: 860px) { width: 240px; height: 240px; }
+  @media (max-width: 860px) { width: 220px; height: 220px; }
   @media (max-width: 480px) { width: 200px; height: 200px; }
 `
 
