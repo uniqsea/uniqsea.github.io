@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { getProjectPath } from '../utils/slug.js'
 import { Badge } from './Badge.jsx'
 import { CoverPlaceholder } from './CoverPlaceholder.jsx'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const Wrap = styled.article`
   display: grid;
@@ -82,8 +83,12 @@ function getClickConfig(project) {
 }
 
 export function ProjectCard({ project }) {
+  const { language } = useSitePreferences()
   const cover = project.thumb || project.cover
-  const label = project.label || (project.status ? project.status : null)
+  const label = language === 'zh'
+    ? (project.labelZh || project.statusZh || project.label || project.status || null)
+    : (project.label || project.status || null)
+  const summary = language === 'zh' ? (project.summaryZh || project.summary) : project.summary
   const { type, to, href } = getClickConfig(project)
 
   const WrapperComponent = ({ children }) => {
@@ -124,7 +129,7 @@ export function ProjectCard({ project }) {
           </WrapperComponent>
           {label && <Badge variant="outline">{label}</Badge>}
         </TitleRow>
-        {project.summary && <Desc>{project.summary}</Desc>}
+        {summary && <Desc>{summary}</Desc>}
         {(project.org || project.year) && (
           <Meta>
             {project.org && <span>{project.org}</span>}

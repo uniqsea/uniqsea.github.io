@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useState } from 'react'
 import { toThumbPath } from '../utils/imageUtils.js'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const Card = styled.button`
   display: block;
@@ -24,6 +25,7 @@ const Image = styled.img`
 `
 
 export function PhotoCard({ photo, onCardClick }) {
+  const { t } = useSitePreferences()
   const caption = photo.caption
 
   const imageSrc = photo.image || photo.url || ''
@@ -40,11 +42,11 @@ export function PhotoCard({ photo, onCardClick }) {
     <Card
       type="button"
       onClick={onCardClick}
-      aria-label={caption ? `Open ${caption}` : 'Open photo'}
+      aria-label={caption ? t('moments.open', { caption }) : t('moments.openPhoto')}
     >
       <Image
         src={currentSrc}
-        alt={caption || 'Photo'}
+        alt={caption || t('moments.photo')}
         loading="lazy"
         onError={handleImageError}
       />

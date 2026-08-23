@@ -2,6 +2,7 @@ import { useEffect, useCallback, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { AnimatePresence, motion } from 'motion/react'
 import { toFullPath, toThumbPath, toTitleCase } from '../utils/imageUtils.js'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 // ─── Spinner animation ───────────────────────────────────────────────────────
 
@@ -293,6 +294,7 @@ const transition = { duration: 0.24, ease: [0.25, 0.46, 0.45, 0.94] }
 // ─── LightboxImage (owns imageLoaded so it resets on every remount) ───────────
 
 function LightboxImage({ photo }) {
+  const { t } = useSitePreferences()
   const [imageLoaded, setImageLoaded] = useState(false)
   const fullSrc = toFullPath(photo)
   const originalSrc = photo?.image || photo?.url || ''
@@ -311,7 +313,7 @@ function LightboxImage({ photo }) {
       <ImgContainer style={{ boxShadow: imageLoaded ? undefined : 'none' }}>
         <Img
           src={currentSrc}
-          alt={photo.caption || 'Photo'}
+          alt={photo.caption || t('moments.photo')}
           draggable={false}
           style={{ opacity: imageLoaded ? 1 : 0 }}
           onLoad={() => setImageLoaded(true)}
@@ -335,6 +337,7 @@ function LightboxImage({ photo }) {
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 
 export function Lightbox({ photos, currentIndex, onClose, onPrev, onNext, onJump }) {
+  const { t } = useSitePreferences()
   // direction: -1 = going right (prev), +1 = going left (next), 0 = initial open
   const dirRef = useRef(0)
 
@@ -382,7 +385,7 @@ export function Lightbox({ photos, currentIndex, onClose, onPrev, onNext, onJump
       {/* Top bar */}
       <TopBar>
         <Counter>{currentIndex + 1} / {photos.length}</Counter>
-        <CloseButton onClick={onClose} aria-label="Close">✕</CloseButton>
+        <CloseButton onClick={onClose} aria-label={t('moments.close')}>✕</CloseButton>
       </TopBar>
 
       {/* Image + info */}

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Masonry from 'react-masonry-css'
 import { PhotoCard } from './PhotoCard.jsx'
 import { Lightbox } from './Lightbox.jsx'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const MasonryGrid = styled(Masonry)`
   display: flex;
@@ -40,6 +41,7 @@ const EmptyText = styled.p`
 `
 
 export function MasonryGallery({ photos }) {
+  const { t } = useSitePreferences()
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
   const openLightbox = useCallback(index => setLightboxIndex(index), [])
@@ -54,10 +56,8 @@ export function MasonryGallery({ photos }) {
   if (!photos || photos.length === 0) {
     return (
       <EmptyState>
-        <EmptyTitle>No moments yet</EmptyTitle>
-        <EmptyText>
-          Photos will appear here once you add them to the moments array in data.js
-        </EmptyText>
+        <EmptyTitle>{t('moments.emptyTitle')}</EmptyTitle>
+        <EmptyText>{t('moments.emptyText')}</EmptyText>
       </EmptyState>
     )
   }

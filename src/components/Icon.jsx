@@ -22,7 +22,7 @@ export function Icon({ name, size = 16, ...props }) {
       alt={name} 
       width={size} 
       height={size}
-      style={{ display: 'inline-block', verticalAlign: 'middle' }}
+      style={{ display: 'inline-block', verticalAlign: 'middle', filter: 'var(--icon-filter)' }}
       {...props}
     />
   )

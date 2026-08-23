@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { projects } from '../data.js'
 import { ProjectCard as ProjectCardView } from './ProjectCard.jsx'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const Section = styled.section`
   padding: 72px 0 88px;
@@ -42,11 +43,12 @@ const ProjectGrid = styled.div`
 // card moved to its own component
 
 export function ProjectsSection({ maxWidth: Max }) {
+  const { t } = useSitePreferences()
   return (
     <Section id="projects">
       <Max>
         <SectionHeader>
-          <h2>Selected Projects</h2>
+          <h2>{t('sections.projects')}</h2>
         </SectionHeader>
         <ProjectGrid>
           {projects.map(project => (

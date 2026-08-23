@@ -16,11 +16,11 @@ export const GlobalStyle = createGlobalStyle`
     --shadow-lg: none;
     --glass: transparent;
     --glass-border: transparent;
+    --icon-filter: none;
     --heading-font: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
-  @media (prefers-color-scheme: dark) {
-    :root {
+  :root[data-theme='dark'] {
       --bg: #0b0b0c;
       --bg-alt: #0f1115;
       --surface: #0f1115;
@@ -35,7 +35,21 @@ export const GlobalStyle = createGlobalStyle`
       --shadow-lg: none;
       --glass: transparent;
       --glass-border: transparent;
-    }
+      --icon-filter: invert(1) brightness(1.08);
+  }
+
+  :root[data-theme='light'] {
+    --bg: #f8f8f8;
+    --bg-alt: #fafafa;
+    --surface: #f8f8f8;
+    --surface-hover: #f6f6f6;
+    --fg: #111111;
+    --muted: #5f6672;
+    --accent: #252525;
+    --accent-contrast: #ffffff;
+    --signal-red: #ef4444;
+    --border: rgba(17, 17, 17, 0.12);
+    --icon-filter: none;
   }
   
   @media (prefers-reduced-motion: reduce) {
@@ -61,6 +75,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     font-weight: 400;
     overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   h1, h2, h3, h4, h5, h6 { 

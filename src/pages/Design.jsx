@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { NavBar } from '../components/NavBar.jsx'
 import { Page, Max } from '../components/Layout.jsx'
 import { designs } from '../data/designs.js'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const Section = styled.section`
   padding: clamp(64px, 9vw, 112px) 0 96px;
@@ -132,20 +133,21 @@ const previewDots = Array.from({ length: 260 }, (_, i) => {
 const showVisitorGlobe = false
 
 export default function Design() {
+  const { t } = useSitePreferences()
   return (
     <Page>
       <NavBar />
       <Section>
         <Max>
           <Header>
-            <Title>Design</Title>
-            <Subtitle>Design work and visual artifacts.</Subtitle>
+            <Title>{t('design.title')}</Title>
+            <Subtitle>{t('design.subtitle')}</Subtitle>
           </Header>
           <Grid>
             {showVisitorGlobe && (
               <InteractiveCard as={Link} to="/design/visitor-globe">
                 <Preview>
-                  <PreviewTag>Interactive</PreviewTag>
+                  <PreviewTag>{t('design.interactive')}</PreviewTag>
                   <svg viewBox="0 0 100 75" aria-hidden="true">
                     <line x1="34" y1="0" x2="34" y2="75" stroke="rgba(255,255,255,.22)" strokeWidth=".45" />
                     <line x1="67" y1="0" x2="67" y2="75" stroke="rgba(255,255,255,.22)" strokeWidth=".45" />
@@ -165,7 +167,7 @@ export default function Design() {
                 </Preview>
                 <CardMeta>
                   <CardTitle>unique</CardTitle>
-                  <CardSub>Live · your country in dots</CardSub>
+                  <CardSub>{t('design.liveCountry')}</CardSub>
                 </CardMeta>
               </InteractiveCard>
             )}
@@ -174,7 +176,7 @@ export default function Design() {
                 as={Link}
                 key={item.id}
                 to={`/design/${item.id}`}
-                aria-label={`Open ${item.title}`}
+                aria-label={t('design.open', { title: item.title })}
               >
                 <ImageWrap>
                   <img src={item.image} alt={item.title} />

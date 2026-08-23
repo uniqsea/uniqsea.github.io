@@ -3,6 +3,7 @@ import { NavBar } from '../components/NavBar.jsx'
 import { MasonryGallery } from '../components/MasonryGallery.jsx'
 import { Page, Max } from '../components/Layout.jsx'
 import { moments } from '../data.js'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const Section = styled.section`
   padding: clamp(64px, 9vw, 112px) 0 96px;
@@ -36,14 +37,15 @@ const Subtitle = styled.p`
 `
 
 export default function Moments() {
+  const { t } = useSitePreferences()
   return (
     <Page>
       <NavBar />
       <Section>
         <Max>
           <Header>
-            <Title>Moments</Title>
-            <Subtitle>Capturing life through my lens.</Subtitle>
+            <Title>{t('moments.title')}</Title>
+            <Subtitle>{t('moments.subtitle')}</Subtitle>
           </Header>
           <MasonryGallery photos={moments} />
         </Max>

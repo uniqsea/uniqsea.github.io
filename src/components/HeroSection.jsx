@@ -6,6 +6,7 @@ import { site, socials } from '../data.js'
 import { Icon } from './Icon.jsx'
 import haiyangPhoto from '../assets/haiyang.png'
 import seaPhoto from '../assets/sea.png'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const Hero = styled.header`
   display: flex;
@@ -129,8 +130,9 @@ const PhotoBack = styled(PhotoFace)`
 `
 
 export function HeroSection({ maxWidth: Max }) {
+  const { t } = useSitePreferences()
   const preferred = site.preferredName || site.fullName?.split(' ').slice(-1)[0] || site.name
-  const fullText = `Hello, I'm ${preferred}`
+  const fullText = t('hero.greeting', { name: preferred })
 
   const [flipped, setFlipped] = useState(false)
 
@@ -164,10 +166,10 @@ export function HeroSection({ maxWidth: Max }) {
               ))}
             </Title>
             <Description>
-              {site.blurb.split('\n').map((line, index) => (
+              {t('hero.blurb').split('\n').map((line, index, lines) => (
                 <span key={index}>
                   {line}
-                  {index < site.blurb.split('\n').length - 1 && <br />}
+                  {index < lines.length - 1 && <br />}
                 </span>
               ))}
             </Description>
@@ -188,16 +190,16 @@ export function HeroSection({ maxWidth: Max }) {
             transitionSpeed={400}
             style={{ justifySelf: 'center' }}
           >
-            <FlipContainer onClick={() => setFlipped(f => !f)} aria-label="Toggle portrait">
+            <FlipContainer onClick={() => setFlipped(f => !f)} aria-label={t('hero.togglePortrait')}>
               <FlipInner
                 animate={{ rotateY: flipped ? 180 : 0 }}
                 transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               >
                 <PhotoFace>
-                  <img src={haiyangPhoto} alt={site.fullName || 'Portrait'} />
+                  <img src={haiyangPhoto} alt={t('hero.portrait', { name: site.fullName })} />
                 </PhotoFace>
                 <PhotoBack>
-                  <img src={seaPhoto} alt="sea" />
+                  <img src={seaPhoto} alt={t('hero.sea')} />
                 </PhotoBack>
               </FlipInner>
             </FlipContainer>

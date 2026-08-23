@@ -9,7 +9,7 @@ export const publications = [
   {
     id: 'p4',
     title: 'EchoMind: Augmenting Recorded Presentations with Context-Grounded Conversational Agents and Collective Viewer Signals',
-    authorsHtml: '<strong><u>Haiyang Xu</u></strong>, Yunhui Song, Black Sun, and Niklas Elmqvist.',
+    authorsHtml: '<strong><u>Haiyang Xu</u></strong><sup>*</sup>, Yunhui Song<sup>*</sup>, Black Sun, and Niklas Elmqvist.',
     venueHtml: '<em>NordiCHI 2026</em>',
     year: '2026',
     thumb: echoMindCover,

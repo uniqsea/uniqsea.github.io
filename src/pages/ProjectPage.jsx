@@ -7,6 +7,7 @@ import { projects } from '../data.js'
 import { slugify } from '../utils/slug.js'
 import { Badge } from '../components/Badge.jsx'
 import ReactMarkdown from 'react-markdown'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 // 1. Header Section - 居中，无宽度限制
 const Header = styled.header`
@@ -228,6 +229,7 @@ const NotFound = styled.div`
 `
 
 export default function ProjectPage() {
+  const { language, t } = useSitePreferences()
   const { slug } = useParams()
   const project = projects.find(p => (p.slug || slugify(p.title)) === slug)
 
@@ -237,8 +239,8 @@ export default function ProjectPage() {
         <NavBar />
         <Max>
           <NotFound>
-            <h1>Project Not Found</h1>
-            <Link to="/projects">← Back to Projects</Link>
+            <h1>{t('projects.notFound')}</h1>
+            <Link to="/projects">← {t('projects.back')}</Link>
           </NotFound>
         </Max>
       </Page>
@@ -257,7 +259,7 @@ export default function ProjectPage() {
             {project.org && <span>{project.org}</span>}
             {project.org && project.year && <span>·</span>}
             {project.year && <span>{project.year}</span>}
-            {project.status && <Badge variant="outline">{project.status}</Badge>}
+            {project.status && <Badge variant="outline">{language === 'zh' ? (project.statusZh || project.status) : project.status}</Badge>}
           </Meta>
         </Header>
 
@@ -298,7 +300,7 @@ export default function ProjectPage() {
 
         {/* 7. Back Link */}
         <BackSection>
-          <Link to="/projects">← Back to Projects</Link>
+          <Link to="/projects">← {t('projects.back')}</Link>
         </BackSection>
       </Max>
     </Page>

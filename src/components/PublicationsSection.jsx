@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { publications, publicationsHeaderNoteHtml } from '../data.js'
 import { PublicationCard } from './PublicationCard.jsx'
+import { useSitePreferences } from '../context/SitePreferences.jsx'
 
 const Section = styled.section`
   padding: 64px 0;
@@ -40,13 +41,14 @@ const List = styled.ol`
 
 
 export function PublicationsSection({ maxWidth: Max }) {
+  const { t } = useSitePreferences()
   if (!publications?.length) return null
 
   return (
     <Section id="publications">
       <Max>
         <SectionHeader>
-          <h2>Publications</h2>
+          <h2>{t('sections.publications')}</h2>
           {publicationsHeaderNoteHtml ? (
             <HeaderNote dangerouslySetInnerHTML={{ __html: publicationsHeaderNoteHtml }} />
           ) : null}
