@@ -52,6 +52,7 @@ export const projects = [
   {
     slug: 'nobody-wants-to-talk-into-a-void',
     title: 'EchoMind',
+    hidden: true,
     summary: 'An Intelligent Feedback System for Talks and Presentations',
     summaryZh: '面向演讲与展示的智能反馈系统。',
     status: 'COURSE PROJECT',

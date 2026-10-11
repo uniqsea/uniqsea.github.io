@@ -51,7 +51,7 @@ export function ProjectsSection({ maxWidth: Max }) {
           <h2>{t('sections.projects')}</h2>
         </SectionHeader>
         <ProjectGrid>
-          {projects.map(project => (
+          {projects.filter(project => !project.hidden).map(project => (
             <ProjectCardView key={project.title} project={project} />
           ))}
         </ProjectGrid>
