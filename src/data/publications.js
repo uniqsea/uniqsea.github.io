@@ -17,7 +17,10 @@ export const publications = [
     coverTextColor: '#fff7df',
     award: '',
     tags: ['Paper', 'HCI'],
-    links: [],
+    links: [
+      { label: 'DOI', href: 'https://doi.org/10.1145/3829807.3829883', tone: 'info' },
+      { label: 'PDF', href: '/publication/3829807.3829883.pdf', tone: 'pdf' },
+    ],
   },
   {
     id: 'p3',
