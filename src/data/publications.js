@@ -31,7 +31,7 @@ export const publications = [
     thumb: teethMarkCover,
     coverTitle: 'TeethMark',
     coverTextColor: '#fff7df',
-    award: '',
+    award: 'Honorable Mention',
     tags: ['Paper', 'HCI'],
     links: [],
   },

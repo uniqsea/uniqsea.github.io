@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
+import { Trophy } from 'lucide-react'
 import { CoverPlaceholder } from './CoverPlaceholder.jsx'
 
 const Row = styled.li`
@@ -75,6 +76,13 @@ const Meta = styled.div`
   font-weight: 600;
 `
 
+const MetaRow = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+`
+
 const Badges = styled.div`
   display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px;
 `
@@ -101,9 +109,21 @@ const PublicationLink = styled.a`
   }
 `
 
-const Award = styled.div`
-  font-size: 12px; font-weight: 600; color: var(--fg);
-  display: inline-flex; align-items: center; gap: 6px;
+const Award = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #886114;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+
+  svg { flex-shrink: 0; }
+
+  :root[data-theme='dark'] & {
+    color: #d9b66f;
+  }
 `
 
 export function PublicationCard({ pub }) {
@@ -122,9 +142,6 @@ export function PublicationCard({ pub }) {
           : <CoverPlaceholder title={pub.title} coverId={pub.coverId} />}
       </Thumb>
       <Content>
-        {pub.award && (
-          <Award>🏆 {pub.award}</Award>
-        )}
         <TopLine>
           <Title>{pub.title}</Title>
         </TopLine>
@@ -135,13 +152,18 @@ export function PublicationCard({ pub }) {
         ) : (
           authorsText && <Authors>{authorsText}</Authors>
         )}
-        {pub.venueHtml ? (
-          <Meta dangerouslySetInnerHTML={{ __html: pub.venueHtml }} />
-        ) : pub.venueMd ? (
-          <Meta className="md"><ReactMarkdown>{pub.venueMd}</ReactMarkdown></Meta>
-        ) : (
-          <Meta>{pub.venue}{pub.year ? ` ${pub.year}` : ''}{pub.volume ? `, ${pub.volume}` : ''}</Meta>
-        )}
+        <MetaRow>
+          {pub.venueHtml ? (
+            <Meta dangerouslySetInnerHTML={{ __html: pub.venueHtml }} />
+          ) : pub.venueMd ? (
+            <Meta className="md"><ReactMarkdown>{pub.venueMd}</ReactMarkdown></Meta>
+          ) : (
+            <Meta>{pub.venue}{pub.year ? ` ${pub.year}` : ''}{pub.volume ? `, ${pub.volume}` : ''}</Meta>
+          )}
+          {pub.award && (
+            <Award><Trophy size={15} strokeWidth={1.75} aria-hidden="true" />{pub.award}</Award>
+          )}
+        </MetaRow>
         {links.length > 0 && (
           <Badges>
             {links.map(l => (
