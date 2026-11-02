@@ -8,6 +8,7 @@ export const messages = {
       switchToLight: 'Use light mode',
     },
     hero: {
+      jobMarket: 'On the job market',
       greeting: "Hello, I'm {name}",
       blurb: `I am currently a Master's student in Computer Science at Aarhus University, specializing in Human-Computer Interaction.\nMy interests lie in how technology can enhance human experiences in everyday life, particularly within certain communities. I am passionate about human-centered design and about creating interfaces that transform technology into creative and meaningful experiences that actively support people's well-being.`,
       togglePortrait: 'Toggle portrait',
@@ -48,6 +49,7 @@ export const messages = {
       switchToLight: '切换到浅色模式',
     },
     hero: {
+      jobMarket: '正在求职中',
       greeting: '你好，我是{name}',
       blurb: `我目前就读于丹麦奥胡斯大学计算机科学硕士项目，研究方向是人机交互。\n我关注技术如何改善日常生活中的真实体验，尤其是它如何服务于不同社群。我热衷于以人为本的设计，并尝试把技术转化为富有创造力、意义明确且能主动支持人们身心健康的交互体验。`,
       togglePortrait: '切换头像',

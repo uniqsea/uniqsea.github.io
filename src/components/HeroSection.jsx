@@ -53,6 +53,48 @@ const Title = styled.h1`
   }
 `
 
+const JobBadge = styled(motion.span)`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 6px 14px 6px 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent, #00c68d) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #00c68d) 36%, transparent);
+  border-radius: 999px;
+`
+
+const PulseDot = styled.span`
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00c68d;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #00c68d;
+    animation: jobPulse 1.8s ease-out infinite;
+  }
+
+  @keyframes jobPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before { animation: none; }
+  }
+`
+
 // no subtitle per user request
 
 const Description = styled.p`
@@ -151,6 +193,14 @@ export function HeroSection({ maxWidth: Max }) {
       <Max>
         <Grid>
           <Lead>
+            <JobBadge
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <PulseDot aria-hidden />
+              {t('hero.jobMarket')}
+            </JobBadge>
             <Title>
               {fullText.split('').map((char, index) => (
                 <motion.span
