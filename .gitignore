@@ -33,3 +33,7 @@ DESIGN.md
 *.njsproj
 *.sln
 *.sw?
+
+# Local design drafts, archived research, and review artifacts
+/docs/
+/output/
