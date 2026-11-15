@@ -1,5 +1,4 @@
 import visionnavCover from '../assets/projects/visionnav-cover.svg'
-import bioralCover from '../assets/publication/bioral-demo-cover.png'
 import letsCeramicCover from '../assets/projects/ceramic-cover.png'
 import EchoMindCover from '../assets/projects/echomind-cover.png'
 

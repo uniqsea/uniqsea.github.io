@@ -30,20 +30,15 @@ const Thumb = styled.div`
   overflow: hidden;
   background: var(--bg-alt);
   img { width: 100%; height: 100%; object-fit: cover; display: block; }
-`
 
-const CoverTitle = styled.span`
-  position: absolute;
-  left: clamp(18px, 2.2vw, 26px);
-  bottom: clamp(18px, 2.2vw, 24px);
-  max-width: calc(100% - 44px);
-  color: ${({ $color }) => $color || '#26382d'};
-  font-family: var(--heading-font);
-  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.035em;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+  /* hairline edge so light screenshots don't dissolve into the page */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(17, 17, 17, 0.1);
+    pointer-events: none;
+  }
 `
 
 const Content = styled.div`
@@ -135,10 +130,7 @@ export function PublicationCard({ pub }) {
     <Row>
       <Thumb>
         {thumb
-          ? <>
-              <img src={thumb} alt={pub.title} />
-              {pub.coverTitle ? <CoverTitle $color={pub.coverTextColor}>{pub.coverTitle}</CoverTitle> : null}
-            </>
+          ? <img src={thumb} alt={pub.title} />
           : <CoverPlaceholder title={pub.title} coverId={pub.coverId} />}
       </Thumb>
       <Content>

@@ -1,7 +1,9 @@
-import bioralCover from '../assets/publication/bioral-demo-cover.png'
-import magheartCover from '../assets/publication/magheart-cover.png'
-import teethMarkCover from '../assets/publication/teethmark-cover-v6-cobalt.webp'
-import echoMindCover from '../assets/publication/echomind-cover-v2-teal.png'
+// Covers are 16:10 crops of real figures (paper teasers / device photos).
+import bioralCover from '../assets/publication/bioral-device.webp'
+import magheartCover from '../assets/publication/magheart-lego.webp'
+import teethMarkCover from '../assets/publication/teethmark-cover.webp'
+import capCellCover from '../assets/publication/capcell-blister.webp'
+import echoMindCover from '../assets/publication/echomind-ecosystem.webp'
 
 export const publicationsHeaderNoteHtml = '<sup>*</sup> Equal Contribution'
 
@@ -13,8 +15,6 @@ export const publications = [
     venueHtml: '<em>NordiCHI 2026</em>',
     year: '2026',
     thumb: echoMindCover,
-    coverTitle: 'EchoMind',
-    coverTextColor: '#fff7df',
     award: '',
     tags: ['Paper', 'HCI'],
     links: [
@@ -29,11 +29,12 @@ export const publications = [
     venueHtml: '<em>UIST 2026</em>',
     year: '2026',
     thumb: teethMarkCover,
-    coverTitle: 'TeethMark',
-    coverTextColor: '#fff7df',
     award: 'Honorable Mention',
     tags: ['Paper', 'HCI'],
-    links: [],
+    links: [
+      { label: 'DOI', href: 'https://doi.org/10.1145/3830398.3830646', tone: 'info' },
+      { label: 'PDF', href: '/publication/3830398.3830646.pdf', tone: 'pdf' },
+    ],
   },
   {
     id: 'p5',
@@ -41,10 +42,13 @@ export const publications = [
     authorsHtml: 'Yijing Jiang, <strong><u>Haiyang Xu</u></strong>, Yunhui Song, Black Sun, Junzhe Jin, and Michael Wessely.',
     venueHtml: '<em>UIST 2026 Poster</em>',
     year: '2026',
-    coverId: 'clouds',
+    thumb: capCellCover,
     award: '',
     tags: ['Poster', 'HCI'],
-    links: [],
+    links: [
+      { label: 'DOI', href: 'https://doi.org/10.1145/3830397.3841851', tone: 'info' },
+      { label: 'PDF', href: '/publication/3830397.3841851.pdf', tone: 'pdf' },
+    ],
   },
   {
     id: 'p2',
