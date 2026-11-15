@@ -1,6 +1,6 @@
 // Covers are 16:10 crops of real figures (paper teasers / device photos).
 import bioralCover from '../assets/publication/bioral-device.webp'
-import magheartCover from '../assets/publication/magheart-lego.webp'
+import magheartCover from '../assets/publication/magheart-hardware.webp'
 import teethMarkCover from '../assets/publication/teethmark-cover.webp'
 import capCellCover from '../assets/publication/capcell-blister.webp'
 import echoMindCover from '../assets/publication/echomind-ecosystem.webp'
