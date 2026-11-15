@@ -12,6 +12,12 @@ import { getPageTitle } from './utils/pageTitle.js'
 // Heavy three.js page — code-split so the rest of the site never loads it.
 const VisitorGlobePage = lazy(() => import('./pages/VisitorGlobePage.jsx'))
 
+// Local-only pages (src/local/ is gitignored). Each folder exports `path` and a
+// default component from route.jsx. Dev server only; never part of a build.
+const localRoutes = import.meta.env.DEV
+  ? Object.values(import.meta.glob('./local/*/route.jsx', { eager: true }))
+  : []
+
 export default function App(){
   const { pathname } = useLocation()
 
@@ -36,6 +42,9 @@ export default function App(){
           </Suspense>
         }
       />
+      {localRoutes.map(({ path, default: LocalPage }) => (
+        <Route key={path} path={path} element={<LocalPage />} />
+      ))}
       <Route path="*" element={<Home />} />
     </Routes>
   )

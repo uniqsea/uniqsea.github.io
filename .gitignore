@@ -37,3 +37,7 @@ DESIGN.md
 # Local design drafts, archived research, and review artifacts
 /docs/
 /output/
+
+# Local-only pages and PDF portfolio workspace (not deployed)
+/src/local/
+/portfolio/
