@@ -46,6 +46,7 @@ const Meta = styled.dl`
   margin: 0; display: grid; gap: 10px; border-top: 1px solid rgba(17, 17, 17, 0.14); padding-top: 20px;
   > div { display: grid; grid-template-columns: 112px 1fr; gap: 12px; font-size: 14px; line-height: 1.55; align-items: baseline; }
   dd { margin: 0; }
+  dd ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
   strong { font-weight: 500; }
   u { text-underline-offset: 2px; }
   sup { font-size: 0.7em; }
@@ -75,7 +76,7 @@ export default function ProjectOpener({ id, project }) {
       <Left>
         <Reveal>
           <img className="logo" src={asset(project.logo.src)} alt={`${project.name} logo`}
-            style={{ height: 72, width: 'auto', animation: motionKf ? `${motionKf.getName()} 0.8s ease-in-out infinite` : undefined }} />
+            style={{ height: 'clamp(80px, 7.5vw, 100px)', width: 'auto', animation: motionKf ? `${motionKf.getName()} 0.8s ease-in-out infinite` : undefined }} />
         </Reveal>
         <Reveal className="title" delay={0.06}>
           <h2>{project.name}</h2>
@@ -87,7 +88,7 @@ export default function ProjectOpener({ id, project }) {
             <div><dt><Label>{t('Venue')}</Label></dt><dd>{stripTags(p.venueHtml)} · {project.place}</dd></div>
             {p.award && <div><dt><Label>{t('Recognition')}</Label></dt><dd style={{ fontWeight: 500 }}>{t(p.award)}</dd></div>}
             <div><dt><Label>{t('Authors')}</Label></dt><dd dangerouslySetInnerHTML={{ __html: authorsHtml(p).replace('(* equal contribution)', t('(* equal contribution)')) }} /></div>
-            {project.role && <div><dt><Label>{t('Role')}</Label></dt><dd>{project.role}</dd></div>}
+            {project.role && <div><dt><Label>{t('Role')}</Label></dt><dd>{Array.isArray(project.role) ? <ul>{project.role.map((r) => <li key={r}>{r}</li>)}</ul> : project.role}</dd></div>}
           </Meta>
         </Reveal>
         <Reveal delay={0.22}>

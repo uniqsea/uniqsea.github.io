@@ -11,8 +11,16 @@ export const media = {
 /* The paper figures are drawn on white, so this page stays light in dark mode too. */
 export const WebGlobal = createGlobalStyle`
   html, body { background: #ffffff !important; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-anchor: none; } /* LangProvider keeps the reading position itself */
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* Language switch (LangProvider): the old text fades out completely, then the new text fades in,
+     so the two layouts never overlap as a double image. The top bar has its own layer and stays put. */
+  @keyframes portfolio-lang-out { to { opacity: 0; } }
+  @keyframes portfolio-lang-in { from { opacity: 0; } }
+  ::view-transition-old(root) { animation: portfolio-lang-out 0.22s ease-in both; }
+  ::view-transition-new(root) { animation: portfolio-lang-in 0.34s ease-out 0.22s both; }
+  ::view-transition-group(portfolio-bar) { animation-duration: 0.3s; }
 `
 
 export const Page = styled.main`
@@ -22,7 +30,7 @@ export const Page = styled.main`
   --paper: #ffffff;
   --alt: #f6f6f4;
   --body-font: Roboto, -apple-system, 'Segoe UI', sans-serif;
-  --bar: 60px;
+  --bar: 65px; /* set to the top bar's real height by TopBar */
   --c: #111111; --c-deep: #111111; --c-tint: #f6f6f4;
   color: var(--fg);
   background: var(--paper);

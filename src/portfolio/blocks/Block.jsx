@@ -75,13 +75,13 @@ export default function Block({ b }) {
   if (b.h) return <H2>{b.h}</H2>
   if (b.h3) return <H3>{b.h3}</H3>
   if (b.lead) return <Paras $lead $columns={b.columns}><p>{rich(b.lead)}</p></Paras>
-  if (b.p) return <Paras $columns={b.columns}>{[].concat(b.p).map((t) => <p key={t.slice(0, 24)}>{rich(t)}</p>)}</Paras>
-  if (b.checks) return <Checks $n={b.checks.length}>{b.checks.map(([t, x, ok]) => <div key={t} className={ok ? 'ok' : undefined}><h3>{t}</h3><em>{ok ? '✓' : '?'}</em><p>{x}</p></div>)}</Checks>
+  if (b.p) return <Paras $columns={b.columns}>{[].concat(b.p).map((t, i) => <p key={i}>{rich(t)}</p>)}</Paras>
+  if (b.checks) return <Checks $n={b.checks.length}>{b.checks.map(([t, x, ok], i) => <div key={i} className={ok ? 'ok' : undefined}><h3>{t}</h3><em>{ok ? '✓' : '?'}</em><p>{x}</p></div>)}</Checks>
   if (b.label) return <Label>{b.label}</Label>
   if (b.bullets) return <Bullets>{b.bullets.map(pair)}</Bullets>
   if (b.ordered) return <Ordered $columns={b.columns}>{b.ordered.map(pair)}</Ordered>
   if (b.findings) return <Foot><Label>{t('Findings')}</Label><Bullets>{b.findings.map(pair)}</Bullets></Foot>
-  if (b.stats) return <Stats>{b.stats.map(([k, v]) => <div key={k}><span>{k}</span><strong><CountUp text={v} /></strong></div>)}</Stats>
+  if (b.stats) return <Stats>{b.stats.map(([k, v], i) => <div key={i}><span>{k}</span><strong><CountUp text={v} /></strong></div>)}</Stats>
   if (b.note) return <Foot><Small>{b.note}</Small></Foot>
   if (b.step) return <Step><h3><span>{b.step.n}</span>{b.step.title}</h3><Small>{b.step.text}</Small></Step>
   if (b.ask) return <Ask>{b.ask}</Ask>

@@ -18,7 +18,7 @@ const UI = {
     Venue: '发表',
     Recognition: '荣誉',
     Authors: '作者',
-    Role: '我的工作',
+    Role: '我的角色',
     Findings: '主要发现',
     Projects: '项目',
     'Enlarge figure': '放大图片',

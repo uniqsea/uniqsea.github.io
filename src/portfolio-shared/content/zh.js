@@ -1,5 +1,6 @@
 // Chinese copy for the interactive portfolio, keyed by the exact English string in the content files.
-// localize() in portfolio/i18n.jsx swaps every string found here; anything missing stays in English.
+// localize() in portfolio/i18n.js swaps every string found here; anything missing stays in English.
+// A value may also be an array: a project's role is listed item by item in Chinese.
 // When you edit English copy in projects/*.js, profile.js or more.js, update its key here too.
 
 export default {
@@ -36,8 +37,8 @@ export default {
   'System': '系统',
   'Validation': '验证',
   'Applications': '应用',
-  'Formative study, system software (apart from the design tool), study interfaces, and the language, VR, therapy and cycling applications.':
-    '形成性研究、系统软件（设计工具除外）、实验界面，以及语言教学、VR、康复训练和骑行应用。',
+  'Formative study, design and development of the device software architecture, study interfaces, and the language, VR, therapy and cycling applications.':
+    ['形成性研究', '设备软件架构设计与开发', '实验界面', '应用开发：语言教学、VR、康复训练、骑行'],
   'An interactive brace that lets the tongue tap, slide and press on individual teeth, and feel electrotactile feedback in return.':
     '一副交互式牙套：舌头可以在单颗牙齿上点击、滑动和按压，并感受到电触觉反馈。',
   'What if your teeth became a touch surface?': '如果牙齿变成一块触控面板，会怎样？',
@@ -135,7 +136,7 @@ export default {
   'Problem': '问题',
   'Evaluation': '评估',
   'Interaction design, system design, full-stack development, questionnaire design, and running the evaluation.':
-    '交互设计、系统设计、全栈开发、问卷设计，以及组织实施评估。',
+    ['交互设计', '系统设计', '全栈开发', '问卷设计与用户评估'],
   'A video player that lets viewers ask a recorded talk their questions, and see where others got stuck.':
     '一个视频播放器：观众可以向录播演讲提问，也能看到其他人在哪里卡住了。',
   'The speaker isn\'t here. Only the recording is.': '讲者不在场，只有录像在。',
@@ -203,7 +204,7 @@ export default {
   /* ---------- MagHeart ---------- */
   'Interaction': '交互',
   'Interaction and system design of the icebreaking app, full-stack development; contributed to the hardware prototype.':
-    '破冰应用的交互与系统设计、全栈开发；参与硬件原型制作。',
+    ['破冰应用的交互与系统设计', '全栈开发', '参与硬件原型制作'],
   'A playful icebreaker for hybrid meetings: build a LEGO avatar together, and feel your remote colleague\'s heartbeat in the room.':
     '为混合会议设计的趣味破冰：一起拼出乐高化身，在会议室里感受远程同事的心跳。',
   'Small talk happens in the room, not on the screen': '寒暄发生在会议室里，而不是屏幕上',

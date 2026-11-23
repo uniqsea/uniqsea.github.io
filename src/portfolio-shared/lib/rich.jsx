@@ -4,8 +4,8 @@ export const rich = (t) => t.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/).map((part, i) =>
     : part.startsWith('*') && part.length > 2 ? <i key={i}>{part.slice(1, -1)}</i>
       : part)
 
-/* A [bold lead, rest] pair as a list item. */
-export const pair = ([b, t]) => <li key={b}><span><b>{b}</b>{t}</span></li>
+/* A [bold lead, rest] pair as a list item (keyed by position, so it survives a language switch). */
+export const pair = ([b, t], i) => <li key={i}><span><b>{b}</b>{t}</span></li>
 
 /* A caption is either plain text or [bold title, text]. */
 export const captionParts = (c) => (typeof c === 'string' ? [null, c] : c)

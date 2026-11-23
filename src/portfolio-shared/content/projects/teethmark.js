@@ -8,7 +8,7 @@ export default {
   brand: { c: '#14B8A6', deep: '#0F756E', tint: '#E8F8F5' },
   logo: { src: 'tm-logo.svg', w: '20mm', h: '20mm' },
   stages: ['Background', 'Formative study', 'Design', 'System', 'Validation', 'Applications'],
-  role: 'Formative study, system software (apart from the design tool), study interfaces, and the language, VR, therapy and cycling applications.',
+  role: 'Formative study, design and development of the device software architecture, study interfaces, and the language, VR, therapy and cycling applications.',
   opener: {
     image: 'tm-braces-pair.jpg', fit: 'contain', bg: '#000101', pad: '0',
     intro: 'An interactive brace that lets the tongue tap, slide and press on individual teeth, and feel electrotactile feedback in return.',
