@@ -28,6 +28,8 @@ export const moreWorkRows = (moreWork) => [
       year: p.year,
       title: p.title,
       html: `${p.authorsHtml.replace(/<\/?strong>/g, '')} · ${stripTags(p.venueHtml)}`,
+      authorsHtml: p.authorsHtml.replace(/<\/?strong>/g, ''),
+      venue: stripTags(p.venueHtml),
       links: p.links.map((l) => ({ label: l.label, href: absolute(l) })),
       image: moreWork.pubImages?.[id],
     }

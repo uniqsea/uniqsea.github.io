@@ -16,7 +16,6 @@ const UI = {
     'Thank you.': '感谢阅读。',
     'Selected work': '精选作品',
     Venue: '发表',
-    Recognition: '荣誉',
     Authors: '作者',
     Role: '我的角色',
     Findings: '主要发现',

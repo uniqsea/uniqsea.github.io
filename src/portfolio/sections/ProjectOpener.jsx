@@ -5,6 +5,7 @@ import { asset } from '../../portfolio-shared/content/index.js'
 import { pub, stripTags, subtitle, projectLinks, authorsHtml } from '../../portfolio-shared/lib/publication.js'
 import { Label, media } from '../theme.js'
 import Reveal from '../components/Reveal.jsx'
+import Tag, { Tags } from '../components/Tag.jsx'
 import { useT } from '../i18n.js'
 
 /* MagHeart's logo beats at a resting heart rate (~75 bpm). */
@@ -85,8 +86,7 @@ export default function ProjectOpener({ id, project }) {
         <Reveal delay={0.12}><p className="intro">{opener.intro}</p></Reveal>
         <Reveal delay={0.18}>
           <Meta>
-            <div><dt><Label>{t('Venue')}</Label></dt><dd>{stripTags(p.venueHtml)} · {project.place}</dd></div>
-            {p.award && <div><dt><Label>{t('Recognition')}</Label></dt><dd style={{ fontWeight: 500 }}>{t(p.award)}</dd></div>}
+            <div><dt><Label>{t('Venue')}</Label></dt><dd><Tags><Tag>{stripTags(p.venueHtml)}</Tag>{p.award && <Tag className="accent">{t(p.award)}</Tag>}<span>{project.place}</span></Tags></dd></div>
             <div><dt><Label>{t('Authors')}</Label></dt><dd dangerouslySetInnerHTML={{ __html: authorsHtml(p).replace('(* equal contribution)', t('(* equal contribution)')) }} /></div>
             {project.role && <div><dt><Label>{t('Role')}</Label></dt><dd>{Array.isArray(project.role) ? <ul>{project.role.map((r) => <li key={r}>{r}</li>)}</ul> : project.role}</dd></div>}
           </Meta>

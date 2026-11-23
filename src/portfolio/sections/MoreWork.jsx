@@ -6,6 +6,7 @@ import { useContent, useT } from '../i18n.js'
 import { SITE, moreWorkRows } from '../../portfolio-shared/lib/publication.js'
 import { Container, media } from '../theme.js'
 import Reveal from '../components/Reveal.jsx'
+import Tag from '../components/Tag.jsx'
 import { MORE_ID } from '../hooks/ids.js'
 
 const Wrap = styled.section`
@@ -25,7 +26,7 @@ const Item = styled.a`
   .thumb { aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
   .thumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
   .thumb.contain img { object-fit: contain; padding: 18%; }
-  .y { display: block; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+  .y { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; margin-bottom: 6px; }
   strong { display: block; font: 600 18px/1.35 var(--heading-font); letter-spacing: -0.01em; margin-bottom: 6px; }
   strong u, strong strong { font-weight: inherit; }
   .d { font-size: 14px; line-height: 1.55; color: var(--muted); }
@@ -44,6 +45,12 @@ const Sign = styled(Container)`
   a:hover { border-color: var(--fg); }
 `
 
+/* A small project's text ends in its kind (" · Course project"), which is shown as a tag. */
+const describe = (r) => {
+  const i = r.text?.lastIndexOf(' · ') ?? -1
+  return i < 0 ? { text: r.text } : { text: r.text.slice(0, i), kind: r.text.slice(i + 3) }
+}
+
 export default function MoreWork() {
   const { moreWork } = useContent()
   const t = useT()
@@ -58,7 +65,7 @@ export default function MoreWork() {
                 <a className={`thumb${r.fit === 'contain' ? ' contain' : ''}`} href={r.links[0]?.href} target="_blank" rel="noreferrer" tabIndex={-1} aria-hidden>
                   {r.image && <img src={asset(r.image)} alt="" loading="lazy" />}
                 </a>
-                <div><span className="y">{r.year}</span><strong>{r.title}</strong>{r.html ? <span className="d" dangerouslySetInnerHTML={{ __html: r.html }} /> : <span className="d">{r.text}</span>}</div>
+                <div><span className="y">{r.year}{(r.venue || describe(r).kind) && <Tag>{r.venue || describe(r).kind}</Tag>}</span><strong>{r.title}</strong>{r.authorsHtml ? <span className="d" dangerouslySetInnerHTML={{ __html: r.authorsHtml }} /> : <span className="d">{describe(r).text}</span>}</div>
                 <span className="go">{r.links.map((l) => <a key={l.label} href={l.href} target="_blank" rel="noreferrer"><span>{l.label}<ArrowUpRight aria-hidden /></span></a>)}</span>
               </Item>
             </Reveal>

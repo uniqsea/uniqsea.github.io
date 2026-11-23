@@ -6,6 +6,7 @@ import { useContent, useT } from '../i18n.js'
 import { pub, stripTags, brandVars } from '../../portfolio-shared/lib/publication.js'
 import { Container, Label, media } from '../theme.js'
 import Reveal from '../components/Reveal.jsx'
+import Tag, { Tags } from '../components/Tag.jsx'
 import { projectId } from '../hooks/ids.js'
 
 const Wrap = styled(Container)`
@@ -26,7 +27,6 @@ const Card = styled.a`
   .go { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); transition: background 0.25s, color 0.25s, border-color 0.25s; }
   .go svg { width: 16px; height: 16px; }
   p { font-size: 15px; line-height: 1.55; color: var(--muted); }
-  .venue { font-size: 13px; color: var(--c-deep); font-weight: 500; }
   &:hover { border-color: var(--c); }
   &:hover .img img { transform: scale(1.04); }
   &:hover .go { background: var(--c); border-color: var(--c); color: #fff; }
@@ -48,7 +48,7 @@ export default function WorkIndex() {
                 <div className="txt">
                   <div className="top"><h3>{project.name}</h3><span className="go"><ArrowDown /></span></div>
                   <p>{project.opener.intro}</p>
-                  <span className="venue">{stripTags(p.venueHtml)}{p.award ? ` · ${t(p.award)}` : ''}</span>
+                  <Tags><Tag>{stripTags(p.venueHtml)}</Tag>{p.award && <Tag className="accent">{t(p.award)}</Tag>}</Tags>
                 </div>
               </Card>
             </Reveal>
