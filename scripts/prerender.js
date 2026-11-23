@@ -3,6 +3,8 @@
  *   dist/projects/index.html, dist/publications/index.html, ...
  *   dist/sitemap.xml (generated from the same route list)
  *
+ * Unlisted routes are prerendered but left out of the sitemap.
+ *
  * Crawlers get real content and a 200 for each URL. In the browser, React
  * still mounts over the saved markup as usual.
  *
@@ -75,6 +77,13 @@ function buildRoutes({ site, projects, designs, slugify }) {
       path: `/design/${design.id}/`,
       description: `${design.title} (${design.subtitle}) by ${name}.`,
     })),
+    {
+      // Shared by direct link only: not linked from the site, kept out of the
+      // sitemap, and marked noindex by the page itself.
+      path: '/portfolio/',
+      description: `Portfolio of ${name}: selected HCI research projects.`,
+      unlisted: true,
+    },
   ]
 }
 
@@ -163,6 +172,7 @@ async function renderRoute(browser, baseUrl, siteUrl, route, schema) {
 
 function writeSitemap(siteUrl, routes) {
   const urls = routes
+    .filter(route => !route.unlisted)
     .map(route => `  <url>\n    <loc>${new URL(route.path, siteUrl).href}</loc>\n  </url>`)
     .join('\n')
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -201,7 +211,7 @@ async function main() {
     }
 
     writeSitemap(siteUrl, routes)
-    console.log(`  wrote sitemap.xml (${routes.length} urls)`)
+    console.log(`  wrote sitemap.xml (${routes.filter(route => !route.unlisted).length} urls)`)
   } finally {
     await browser.close()
     await server.close()

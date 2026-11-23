@@ -12,6 +12,9 @@ import { getPageTitle } from './utils/pageTitle.js'
 // Heavy three.js page — code-split so the rest of the site never loads it.
 const VisitorGlobePage = lazy(() => import('./pages/VisitorGlobePage.jsx'))
 
+// Portfolio: public but unlisted (no link on the site, noindex). Code-split like the globe.
+const WebPortfolio = lazy(() => import('./portfolio/WebPortfolio.jsx'))
+
 // Local-only pages (src/local/ is gitignored). Each folder exports `path` and a
 // default component from route.jsx. Dev server only; never part of a build.
 const localRoutes = import.meta.env.DEV
@@ -39,6 +42,14 @@ export default function App(){
         element={
           <Suspense fallback={null}>
             <VisitorGlobePage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/portfolio"
+        element={
+          <Suspense fallback={null}>
+            <WebPortfolio />
           </Suspense>
         }
       />

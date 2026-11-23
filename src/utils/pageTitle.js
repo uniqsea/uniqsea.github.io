@@ -7,6 +7,7 @@ const sectionLabels = {
   publications: 'Publications',
   moments: 'Moments',
   design: 'Design',
+  portfolio: 'Portfolio',
 }
 
 function getDetailLabel(section, id) {
