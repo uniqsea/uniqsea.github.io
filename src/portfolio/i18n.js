@@ -20,6 +20,8 @@ const UI = {
     Role: '我的角色',
     Findings: '主要发现',
     Projects: '项目',
+    'Hover to see the heartbeat': '移到小人上，看看它如何随心跳动',
+    'Preview heartbeat': '预览心跳',
     'Enlarge figure': '放大图片',
     Close: '关闭',
     Previous: '上一张',
