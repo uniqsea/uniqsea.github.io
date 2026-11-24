@@ -7,6 +7,7 @@ export default {
   /* ---------- Profile ---------- */
   'Human-Computer Interaction': '人机交互',
   'M.Sc. Computer Science, Aarhus University': '奥胡斯大学 · 计算机科学硕士',
+  'An engineer with a product and design mind, and a product designer who thinks like an engineer.': '兼具产品与设计思维的工程师，也是习惯从工程角度思考的产品设计师。',
   'I am interested in how technology can enhance human experiences in everyday life, particularly within certain communities, and in creating interfaces that transform technology into creative and meaningful experiences.':
     '我关注技术如何提升人们的日常体验，尤其是特定群体的体验；也希望创造能把技术转化为富有创造力、有意义体验的界面。',
 

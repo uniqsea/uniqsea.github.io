@@ -10,7 +10,8 @@ export const contact = {
 }
 
 export const cover = {
-  role: ['Human-Computer Interaction', 'M.Sc. Computer Science, Aarhus University'],
+  role: ['Human-Computer Interaction', 'M.Sc. Computer Science, Aarhus University'], // PDF cover
+  identity: 'An engineer with a product and design mind, and a product designer who thinks like an engineer.', // web hero
   statement:
     'I am interested in how technology can enhance human experiences in everyday life, particularly within certain communities, and in creating interfaces that transform technology into creative and meaningful experiences.',
   portrait: 'portrait.png',

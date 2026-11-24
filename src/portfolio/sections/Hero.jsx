@@ -6,17 +6,19 @@ import { asset, contact } from '../../portfolio-shared/content/index.js'
 import { useContent } from '../i18n.js'
 import { Container, media } from '../theme.js'
 import Reveal from '../components/Reveal.jsx'
+import CodeMotto from '../components/CodeMotto.jsx'
 
 const Wrap = styled.section`
   padding: clamp(56px, 9vw, 112px) 0 clamp(56px, 8vw, 96px);
 `
 const Grid = styled(Container)`
   display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 6vw, 96px); align-items: end;
-  ${media.tablet} { grid-template-columns: 1fr; }
+  ${media.tablet} { grid-template-columns: minmax(0, 1fr); }
 `
 const Text = styled.div`
-  display: grid; gap: 28px;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px;
   h1 { font-size: clamp(52px, 8vw, 104px); font-weight: 700; line-height: 0.98; letter-spacing: -0.045em; }
+  .role span { display: block; text-wrap: balance; }
   .role { font: 600 clamp(17px, 1.6vw, 20px)/1.45 var(--heading-font); color: var(--muted); letter-spacing: -0.01em; }
   .statement { font-size: 19px; line-height: 1.55; max-width: 620px; }
 `
@@ -43,8 +45,9 @@ export default function Hero() {
     <Wrap id="top">
       <Grid>
         <Text>
-          <Reveal as="h1">{site.fullName}</Reveal>
-          <Reveal delay={0.08}><p className="role">{cover.role[0]}<br />{cover.role[1]}</p></Reveal>
+          <Reveal><CodeMotto /></Reveal>
+          <Reveal as="h1" delay={0.04}>{site.fullName}</Reveal>
+          <Reveal delay={0.08}><p className="role">{cover.identity.split(/(?<=[,，])\s*/).map((half) => <span key={half}>{half}</span>)}</p></Reveal>
           <Reveal delay={0.16}><p className="statement">{cover.statement}</p></Reveal>
           <Reveal delay={0.24}>
             <Contact>
